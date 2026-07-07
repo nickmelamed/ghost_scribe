@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Raw/large data — not committed, see data/download.py
+data/raw/
+data/interim/
+data/processed/*.parquet
+data/processed/*.csv
+
+# Model artifacts
+stage2/adapters/
+*.bin
+*.safetensors
+
+# Kaggle credentials — never commit
+.kaggle/
+kaggle.json
