@@ -1,0 +1,7 @@
+{
+  "model": "xgb",
+  "t_low": 0.04378920793533325,
+  "t_high": 0.9562107920646667,
+  "target_escalation_rate": 0.2,
+  "achieved_escalation_rate_val": 0.20012507817385866
+}
