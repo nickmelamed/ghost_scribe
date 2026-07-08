@@ -19,3 +19,6 @@ stage1/models/*.joblib
 # Kaggle credentials — never commit
 .kaggle/
 kaggle.json
+
+# HITL review session output — local, not committed
+hitl/reviews.jsonl
