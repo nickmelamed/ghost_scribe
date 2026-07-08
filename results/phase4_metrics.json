@@ -1,0 +1,51 @@
+{
+  "escalated_subset_comparison": {
+    "n": 1374,
+    "stage1_alone": {
+      "auc_roc": 0.9155447747928166,
+      "precision": 0.7674825174825175,
+      "recall": 0.8426103646833013,
+      "f1": 0.8032936870997255,
+      "accuracy": 0.8435225618631732
+    },
+    "stage1_plus_2": {
+      "auc_roc": NaN,
+      "precision": 0.9961240310077519,
+      "recall": 0.9865642994241842,
+      "f1": 0.991321118611379,
+      "accuracy": 0.9934497816593887
+    }
+  },
+  "full_pipeline_comparison": {
+    "stage1_only": {
+      "auc_roc": 0.9923676502806629,
+      "precision": 0.9364063166880068,
+      "recall": 0.9580786026200874,
+      "f1": 0.9471184977336499,
+      "accuracy": 0.9616948092557849
+    },
+    "stage1_plus_2": {
+      "auc_roc": NaN,
+      "precision": 0.9921294271972015,
+      "recall": 0.990829694323144,
+      "f1": 0.991479134804457,
+      "accuracy": 0.9939024390243902
+    }
+  },
+  "fairness_combined": {
+    "general_test_human_fpr": 0.00438382854359474,
+    "esl_fpr": 0.005399568034557235,
+    "gap": 0.0010157394909624954,
+    "baseline_gap_threshold": 0.01755304847339998
+  },
+  "stage2_fallback_counts": {
+    "test": {
+      "missing": 0,
+      "escalated": 1374
+    },
+    "esl_eval": {
+      "missing": 0,
+      "escalated": 1612
+    }
+  }
+}
