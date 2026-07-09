@@ -1,9 +1,14 @@
 """Teacher-facing HITL review queue (Streamlit).
 
-Shows each Stage-1-escalated essay (from the val split — kept separate
-from the test split, which stays untouched for evaluation) along with
-Stage 2's suggested label and rationale, and lets the teacher record the
-final determination.
+Shows each essay in the confidence-gated review queue (from the val
+split — kept separate from the test split, which stays untouched for
+evaluation) along with Stage 2's suggested label and rationale, and lets
+the teacher record the final determination. The queue is not the full
+set of Stage-1-escalated essays: see stage2/build_review_queue.py — every
+Stage-2 "AI-generated" verdict is included regardless of confidence
+(CLAUDE.md requires human confirmation before any accusatory action),
+but confident "Human-written" verdicts are auto-cleared without review
+(no action is taken on those either way, so no confirmation is needed).
 
 This is a decision-support tool, not an automated accusation system: no
 verdict shown here is final until a human confirms it below, and nothing
@@ -27,7 +32,13 @@ import pandas as pd
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent.parent
-PREDICTIONS_PATH = ROOT / "data" / "processed" / "stage2_predictions_val.csv"
+# stage2_review_queue_val.csv is the confidence-gated queue (see
+# stage2/build_review_queue.py): every Stage-2 "AI-generated" verdict,
+# plus only the least-confident "Human-written" verdicts. Confident
+# auto-clears never enter this file at all, since no review is required
+# for them (no action is taken either way) — this is not the full
+# escalated pool.
+PREDICTIONS_PATH = ROOT / "data" / "processed" / "stage2_review_queue_val.csv"
 REVIEWS_PATH = ROOT / "hitl" / "reviews.jsonl"
 
 FAILURE_TAGS = [
@@ -69,24 +80,28 @@ def append_review(record: dict) -> None:
 def main() -> None:
     st.title("AI-Text Detection — Teacher Review Queue")
     st.caption(
-        "Decision-support only. Every essay below was flagged as ambiguous by the "
-        "automated pipeline and requires your review — nothing here is an automated "
-        "accusation, and no action is taken until you confirm a determination."
+        "Decision-support only. Every essay below either got an \"AI-generated\" "
+        "suggestion (always reviewed, regardless of confidence) or a "
+        "low-confidence \"Human-written\" suggestion — nothing here is an "
+        "automated accusation, and no action is taken until you confirm a "
+        "determination."
     )
 
     queue = load_queue()
     reviewed_texts = load_reviewed_texts()
-    pending = queue[~queue["text"].isin(reviewed_texts)].reset_index(drop=True)
+    in_queue_mask = queue["text"].isin(reviewed_texts)
+    pending = queue[~in_queue_mask].reset_index(drop=True)
+    n_reviewed_in_queue = int(in_queue_mask.sum())
 
-    st.sidebar.metric("Reviewed", f"{len(reviewed_texts)} / {len(queue)}")
+    st.sidebar.metric("Reviewed", f"{n_reviewed_in_queue} / {len(queue)}")
 
     if len(pending) == 0:
-        st.success("Queue complete — every escalated essay has been reviewed.")
+        st.success("Queue complete — every essay in the review queue has been reviewed.")
         return
 
     row = pending.iloc[0]
 
-    st.progress(len(reviewed_texts) / len(queue))
+    st.progress(n_reviewed_in_queue / len(queue))
     st.markdown(f"**Essay** ({int(row['word_count']) if 'word_count' in row else len(row['text'].split())} words)"
                 if "word_count" in row else "**Essay**")
     st.text_area("Essay text", row["text"], height=350, disabled=True, label_visibility="collapsed")
