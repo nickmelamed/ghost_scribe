@@ -1,21 +1,21 @@
 {
   "calibrated_on": "val",
   "margin": 0.05,
-  "needed_rate": 0.3655629139072848,
-  "gate_rate": 0.4155629139072848,
+  "needed_rate": 0.3668061366806137,
+  "gate_rate": 0.41680613668061367,
   "val": {
-    "n_escalated": 1280,
-    "n_human_verdicts": 755,
-    "n_gated_human_verdicts": 313,
-    "queue_size": 838,
+    "n_escalated": 1242,
+    "n_human_verdicts": 717,
+    "n_gated_human_verdicts": 298,
+    "queue_size": 823,
     "n_dangerous_errors": 9,
     "n_dangerous_errors_queued": 9
   },
   "test_check": {
-    "n_escalated": 1374,
-    "n_human_verdicts": 858,
-    "n_gated_human_verdicts": 356,
-    "queue_size": 872,
+    "n_escalated": 1325,
+    "n_human_verdicts": 809,
+    "n_gated_human_verdicts": 337,
+    "queue_size": 853,
     "n_dangerous_errors": 7,
     "n_dangerous_errors_queued": 7
   }

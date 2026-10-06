@@ -1,0 +1,44 @@
+{
+  "threshold": 0.8,
+  "borderline_threshold": 0.5,
+  "shingle_words": 8,
+  "reference": "train",
+  "splits": {
+    "val": {
+      "n_before": 6396,
+      "n_removed": 228,
+      "n_after": 6168,
+      "n_borderline_kept": 47,
+      "removed_by_label": {
+        "0": 228
+      },
+      "removed_by_source": {
+        "human": 228
+      }
+    },
+    "test": {
+      "n_before": 6396,
+      "n_removed": 297,
+      "n_after": 6099,
+      "n_borderline_kept": 64,
+      "removed_by_label": {
+        "0": 297
+      },
+      "removed_by_source": {
+        "human": 297
+      }
+    },
+    "esl_eval": {
+      "n_before": 6482,
+      "n_removed": 546,
+      "n_after": 5936,
+      "n_borderline_kept": 17,
+      "removed_by_label": {
+        "0": 546
+      },
+      "removed_by_source": {
+        "human_esl_ellipse": 546
+      }
+    }
+  }
+}
