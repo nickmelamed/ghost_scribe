@@ -1,18 +1,10 @@
 import json
 
-import numpy as np
 import pandas as pd
 
 from fairness import esl_eval
 from stage1.features import FEATURE_COLUMNS
-
-
-class StubXGB:
-    """Scores each row by its word_count divided by 100."""
-
-    def predict_proba(self, X):
-        p = X["word_count"].to_numpy() / 100.0
-        return np.column_stack([1 - p, p])
+from tests.helpers import StubXGB
 
 
 def frame(word_counts, labels):

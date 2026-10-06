@@ -11,11 +11,10 @@ comparing their total log-probability. That gives a clean two-way
 classification confidence, independent of whatever text the model
 happened to generate for the rationale.
 
-IMPORTANT: this project forbids automated accusation, so this
-confidence score must only be used to skip human review on
-"Human-written" verdicts (auto-clearing takes no action against a
+This confidence score may only be used to skip human review on
+"Human-written" verdicts. Auto-clearing takes no action against a
 student, so it carries none of the risk the human-confirmation
-requirement exists for). Every "AI-generated" verdict still requires
+requirement exists for. Every "AI-generated" verdict still requires
 human confirmation regardless of confidence. That policy is applied in
 stage2/build_review_queue.py, not here. This module only measures
 confidence.

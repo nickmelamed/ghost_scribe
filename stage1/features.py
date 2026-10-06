@@ -12,7 +12,7 @@ Feature groups (see FEATURE_COLUMNS for the exact list):
   - variance:       sentence_length_std   (sentence-length variance proxy)
   - lexical:        type_token_ratio
   - burstiness:      bigram_burstiness    (n-gram repetition proxy for
-                                            perplexity, see module docstring)
+                                            perplexity, as a stand-in)
   - POS ratios:      noun_ratio, verb_ratio, adj_ratio, adv_ratio,
                       pronoun_ratio, det_ratio, adp_ratio, conj_ratio
   - punctuation:      comma_rate, period_rate, exclamation_rate,

@@ -19,9 +19,9 @@ against a student:
 The confidence threshold for the "Human-written" gate is calibrated
 against the escalated TEST set (known ground truth): of Stage 2's
 errors there in the dangerous direction (predicted human, actually AI,
-which is the case this gate exists to catch), the lowest-confidence one sat at
-the 16th percentile among all human-written predictions. TARGET_RATE=0.20
-below adds margin above that.
+which is the case this gate exists to catch), the lowest-confidence one
+sat at the 16th percentile among all human-written predictions.
+TARGET_RATE=0.20 below adds margin above that.
 
 Output: data/processed/stage2_review_queue_val.csv, same schema as
 data/processed/stage2_predictions_val.csv (what hitl/review_app.py

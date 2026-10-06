@@ -30,8 +30,8 @@ verdict.
    rounding or cherry-picking. ELLIPSE ESL results are not a validated
    benchmark for all non-native writers. The 1/5/25 cost units are
    illustrative, not financial data.
-4. **Stage 2 trains on escalated cases only** [INFERRED from CLAUDE.md "Do
-   NOT". Not selected in the interview, so confirmed only by the marking.]
+4. **Stage 2 trains on escalated cases only** [INFERRED from the "Do NOT" list in
+   the original build spec.]
 5. **Ground-truth labels never reach reviewers.** The review app and LLM
    reviewer drop the true label before display [INFERRED from code].
 
@@ -157,8 +157,8 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
 
 ## 7. Decisions on scope (author, Phase 1)
 
-1. **Remove near-duplicates across splits.** Recommended by Claude and
-   accepted: near-duplicate train/test pairs inflate every metric, Stage 1
+1. **Remove near-duplicates across splits.** Near-duplicates inflate
+   every metric, so they are removed: near-duplicate train/test pairs inflate every metric, Stage 1
    included. Plan: drop test and val rows that share at least 80% of their
    8-word shingles with a train essay (threshold is a proposal, to be
    confirmed when implemented), and drop the 2 exact-text overlaps. Log
@@ -182,7 +182,7 @@ None outstanding from Phase 1.
 
 ---
 
-## Build spec (original, from the first CLAUDE.md)
+## Build spec (original)
 
 ### Context & Goal
 Portfolio project demonstrating a production-style ML flywheel applied to

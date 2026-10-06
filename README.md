@@ -9,7 +9,7 @@ non-native English writing, a well-documented failure mode of AI-text
 detectors, across every round.
 
 **Status: work in progress.** This README will be filled in fully once all
-phases are complete (see `CLAUDE.md` for the build spec and phase list).
+phases are complete (see `docs/SPEC.md` for the build spec and phase list).
 
 ## Framing
 

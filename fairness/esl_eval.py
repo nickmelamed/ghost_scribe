@@ -2,8 +2,8 @@
 
 Compares Stage 1's false-positive rate on the ELLIPSE ESL eval subset
 (built by fairness/data_prep_esl.py from real English Language Learner
-essays, all genuinely human-written) against the general test set's human essays.
-Two FPR variants are reported:
+essays, all genuinely human-written) against the general test set's
+human essays. Two FPR variants are reported:
 
   - fpr_threshold: P(predicted AI | true human) using the standard 0.5
     probability threshold. Comparable to FPR as usually reported in the

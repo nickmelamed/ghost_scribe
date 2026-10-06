@@ -1,18 +1,10 @@
 import math
 
-import numpy as np
 import pandas as pd
 
 from evaluation import evaluate_combined as ec
 from stage1.features import FEATURE_COLUMNS
-
-
-class StubXGB:
-    """Scores each row by its word_count divided by 100."""
-
-    def predict_proba(self, X):
-        p = X["word_count"].to_numpy() / 100.0
-        return np.column_stack([1 - p, p])
+from tests.helpers import StubXGB
 
 
 def features_frame(word_counts, labels):

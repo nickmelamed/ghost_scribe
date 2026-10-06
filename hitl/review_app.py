@@ -6,8 +6,9 @@ evaluation) along with Stage 2's suggested label and rationale, and lets
 the teacher record the final determination. The queue is not the full
 set of Stage-1-escalated essays: see stage2/build_review_queue.py. Every
 Stage-2 "AI-generated" verdict is included regardless of confidence,
-since a human must confirm before any accusatory action, but confident "Human-written" verdicts are auto-cleared without review
-(no action is taken on those either way, so no confirmation is needed).
+since a human must confirm before any accusatory action. Confident
+"Human-written" verdicts are auto-cleared without review, because no
+action is taken on those either way.
 
 This is a decision-support tool, not an automated accusation system: no
 verdict shown here is final until a human confirms it below, and nothing
@@ -53,9 +54,7 @@ st.set_page_config(page_title="AI-Text Detection — Teacher Review Queue", layo
 @st.cache_data
 def load_queue() -> pd.DataFrame:
     df = pd.read_csv(PREDICTIONS_PATH)
-    # Ground truth exists only because this project's data is simulated.
-    # Drop it immediately so it can never end up on screen or in a
-    # decision, since a real teacher reviewing real essays wouldn't have it.
+    # Drop the ground-truth label so it can never reach the screen.
     df = df.drop(columns=["true_label"])
     return df.reset_index(drop=True)
 

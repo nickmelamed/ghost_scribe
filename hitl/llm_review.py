@@ -43,25 +43,7 @@ MAX_ESSAY_CHARS = 1500
 MAX_NEW_TOKENS = 160
 BATCH_SIZE = 8
 
-# Prompt-engineering history (see conversation/commit log for full
-# numbers), kept here so this isn't silently re-litigated later:
-#   v1 (no rubric, "academic-integrity triage" framing): 61.7% accuracy,
-#     but degenerate, defaulting to "Human-written" on 96.6% of cases.
-#   v2 (this version, with neutral framing, explicit stylometric rubric,
-#     debiasing instruction, reasoning-before-answer): ~64% accuracy,
-#     9% unparsed, and importantly non-degenerate, with balanced
-#     predictions. The best-calibrated version tested.
-#   v3 (v2 + two worked few-shot examples): looked better on the surface
-#     (75.8%) but that was fallback contamination from a truncation bug
-#     (52% unparsed, silently falling back to Stage 2's own ~99%-accurate
-#     label). Once fixed and fully isolated from fallback rows, true
-#     accuracy was 56.5%, barely above chance, and biased toward
-#     over-predicting "AI-generated". Few-shot examples made a
-#     non-fine-tuned model *worse*, not better. Reverted.
-# Conclusion: an off-the-shelf 3B instruct model, no matter how it's
-# prompted, tops out well below Stage 2's 99.2% fine-tuned accuracy on
-# this task. Keep this as a documented comparison baseline. Do not feed
-# its output into Phase 6 retraining.
+# Prompt history and measured accuracy are in docs/DECISIONS.md, D16.
 SYSTEM_PROMPT = (
     "You are analyzing a student essay for stylistic evidence of AI "
     "generation, as a second opinion alongside a fine-tuned model's "
@@ -165,8 +147,9 @@ def main() -> int:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
-    # Base model only, no LoRA adapter. See the module docstring.
-    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16).to(device).eval()  # type: ignore[arg-type]  # transformers stub rejects str ids
+    # Base model on purpose, see D16.
+    # The transformers stub rejects a str model id here.
+    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16).to(device).eval()  # type: ignore[arg-type]
 
     df = pd.read_csv(PREDICTIONS_PATH).drop(columns=["true_label"])
     print(f"Running independent LLM review on {len(df)} escalated essays (base model, no adapter)")

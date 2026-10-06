@@ -1,8 +1,6 @@
 # Progress
 
-Current phase and what is left. Claude updates this at the end of each
-phase. CLAUDE.md stays stable and does not track status. The "Now" section
-is shown to Claude at the start of each session and after compaction.
+Current phase and what is left. Update it at the end of each phase.
 
 "Build phase" means a phase of the original spec in docs/SPEC.md. The
 cleanup phases below are separate.
@@ -10,7 +8,7 @@ cleanup phases below are separate.
 ## Now
 
 - [ ] Review and merge `chore/agent-standards`, then decide the order of the
-  behavior changes in "Next". Nothing is pushed yet.
+  behavior changes in "Next".
 
 ## Next
 
@@ -48,9 +46,6 @@ should change on purpose.
 
 Carried over from the Phase 0 assessment.
 
-- Nothing is pushed. Local `main` is 3 commits ahead of `origin/main`, and
-  this branch is 6 commits ahead of `main`. Until `main` is pushed, the style
-  check measures changes against the older `origin/main`.
 - Data, processed splits, adapters, and review files are gitignored and exist
   only on this machine. There are no data checksums, so a result cannot be
   reproduced from the repo alone. `data/checksums.txt` is already a protected
@@ -59,8 +54,8 @@ Carried over from the Phase 0 assessment.
   still commented out. Enabling it installs torch through requirements.txt.
 - `pre-commit` is configured but not installed as a git hook (`.git/hooks`
   has none). Run `make setup` to install it.
-- `.claude/style-ignore` skips the two generated tables. Revert that if you
-  would rather change the code that writes them.
+- `.claude/style-ignore` skips the two generated tables, because their text
+  comes from string literals in the code that writes them.
 - The standards scripts in `scripts/agent/` are excluded from ruff and mypy.
 - Stage 2 is 99.3% on escalated test rows versus 84.4% for Stage 1. Near
   duplicates do not explain it, but all 15 prompts appear in train and test,

@@ -6,8 +6,7 @@ Usage:
     python -m stage2.infer --split esl_eval            # escalated ESL fairness subset
 
 Output: data/processed/stage2_predictions_{split}.csv, joined back to the
-full pipeline by essay text (unique across the dataset, verified during
-preprocessing) since prepare_finetune_data.py's escalated-only jsonl files
+full pipeline by essay text, which is unique across the dataset, since prepare_finetune_data.py's escalated-only jsonl files
 don't retain the original Stage-1 dataframe index.
 """
 

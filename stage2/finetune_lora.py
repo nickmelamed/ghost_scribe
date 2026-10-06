@@ -1,6 +1,6 @@
 """LoRA fine-tune a small instruction-tuned model on Stage-1's escalated
-(ambiguous) training cases only (stage2/data/train.jsonl, see
-prepare_finetune_data.py, never the full dataset).
+(ambiguous) training cases only (stage2/data/train.jsonl, built by
+prepare_finetune_data.py). Never the full dataset.
 
 Model: Qwen2.5-3B-Instruct (open weights, no license gate). Runs on MPS
 (Apple Silicon) in bf16. 4-bit bitsandbytes quantization is skipped here

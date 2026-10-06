@@ -14,8 +14,8 @@ pick the 2 stylometric features (among the 4 most important to the
 XGBoost model) whose value most strongly points, in the direction the
 training population associates with that row's true label, and phrase a
 one-sentence cue from them. This is a templated heuristic explanation for
-teacher context, not a verified causal or linguistic analysis, documented
-as such in the README ethics section.
+teacher context, not a verified causal or linguistic analysis. The README ethics section
+says so.
 """
 
 from __future__ import annotations
