@@ -55,7 +55,7 @@ def main() -> int:
         print(f"No reviews found at {reviews_path}. {launch_hint}")
         return 1
 
-    reviews = pd.DataFrame([json.loads(l) for l in reviews_path.open()])
+    reviews = pd.DataFrame([json.loads(line) for line in reviews_path.open()])
     if reviews.empty:
         print("Reviews file exists but is empty — nothing to apply.")
         return 1

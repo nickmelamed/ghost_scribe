@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 import joblib
 import pandas as pd
@@ -48,13 +49,13 @@ def compute_fairness_metrics() -> dict:
 
     test_human = test[test["label"] == 0]
 
-    results = {}
+    results: dict[str, Any] = {}
     for name, df in [("general_test_human", test_human), ("esl_ellipse", esl)]:
         proba = xgb.predict_proba(df[FEATURE_COLUMNS])[:, 1]
         y_pred = (proba >= 0.5).astype(int)
         bands = assign_band(proba, t_low, t_high)
         results[name] = {
-            "n": int(len(df)),
+            "n": len(df),
             "fpr_threshold": false_positive_rate(df["label"].to_numpy(), y_pred),
             "fpr_auto_flag": auto_flag_rate(bands, df["label"].to_numpy(), positive_true_label=0),
             "escalate_rate": float((bands == "escalate").mean()),

@@ -101,7 +101,7 @@ def score_candidate(model, tokenizer, device, prompts: list[str], candidate_text
         for b in range(len(batch)):
             total_lp = 0.0
             for k in range(n_cand):
-                token_id = input_ids_t[b, max_len - n_cand + k].item()
+                token_id = int(input_ids_t[b, max_len - n_cand + k].item())
                 total_lp += logprobs[b, k, token_id].item()
             results.append(total_lp)
 
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     import sys
 
     split = sys.argv[1] if len(sys.argv) > 1 else "val"
-    records = [json.loads(l) for l in (ROOT / "stage2" / "data" / f"{split}.jsonl").open()]
+    records = [json.loads(line) for line in (ROOT / "stage2" / "data" / f"{split}.jsonl").open()]
     model, tokenizer, device = load_model()
     df = compute_confidence(model, tokenizer, device, records)
     out_path = ROOT / "data" / "processed" / f"stage2_confidence_{split}.csv"

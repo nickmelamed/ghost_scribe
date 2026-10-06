@@ -24,7 +24,6 @@ import json
 from pathlib import Path
 
 import joblib
-import numpy as np
 import pandas as pd
 
 from stage1.escalation_policy import assign_band

@@ -44,7 +44,7 @@ class EscalatedSFTDataset(Dataset):
     def __init__(self, path: Path, tokenizer, max_length: int = MAX_LENGTH):
         self.tokenizer = tokenizer
         self.max_length = max_length
-        self.records = [json.loads(l) for l in path.open()]
+        self.records = [json.loads(line) for line in path.open()]
 
     def __len__(self) -> int:
         return len(self.records)
@@ -60,7 +60,7 @@ class EscalatedSFTDataset(Dataset):
         )
         prompt_ids = self.tokenizer(prompt_text, add_special_tokens=False)["input_ids"]
         target_ids = self.tokenizer(r["target"], add_special_tokens=False)["input_ids"]
-        target_ids = target_ids + [self.tokenizer.eos_token_id]
+        target_ids = [*target_ids, self.tokenizer.eos_token_id]
 
         input_ids = (prompt_ids + target_ids)[: self.max_length]
         labels = ([-100] * len(prompt_ids) + target_ids)[: self.max_length]
@@ -112,9 +112,9 @@ def main() -> int:
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16)
-    model.config.use_cache = False  # required for gradient checkpointing
-    model = get_peft_model(model, LORA_CONFIG)
+    base_model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16)
+    base_model.config.use_cache = False  # required for gradient checkpointing
+    model = get_peft_model(base_model, LORA_CONFIG)
     model.print_trainable_parameters()
     # Needed for gradient checkpointing to work with a frozen base model +
     # LoRA adapters. Without this the checkpointed activations have no

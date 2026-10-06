@@ -37,7 +37,6 @@ What this script does:
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pandas as pd
@@ -125,7 +124,7 @@ def write_summary(
         "source data, so no `generation_source` could be assigned.\n"
     )
 
-    lines.append(f"## Held-out generation sources (unseen at initial training)\n")
+    lines.append("## Held-out generation sources (unseen at initial training)\n")
     lines.append(
         "Standing in for \"a new AI model appears later\" (this dataset has no "
         "real timestamp axis — see CLAUDE.md). Reintroduced in Phase 6, used as "

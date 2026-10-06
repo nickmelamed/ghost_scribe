@@ -24,6 +24,7 @@ Feature groups (see FEATURE_COLUMNS for the exact list):
 from __future__ import annotations
 
 from collections import Counter
+from itertools import pairwise
 
 import nltk
 import numpy as np
@@ -79,7 +80,7 @@ def _bigram_burstiness(words: list[str]) -> float:
     """
     if len(words) < 3:
         return 0.0
-    bigrams = list(zip(words[:-1], words[1:]))
+    bigrams = list(pairwise(words))
     counts = np.array(list(Counter(bigrams).values()), dtype=float)
     if counts.mean() == 0:
         return 0.0
@@ -131,7 +132,7 @@ def extract_features(text: str) -> dict[str, float]:
             "flesch_kincaid_grade": textstat.flesch_kincaid_grade(text),
             "gunning_fog": textstat.gunning_fog(text),
         }
-    except Exception:
+    except Exception:  # noqa: BLE001 textstat can raise on degenerate text
         readability = {
             "flesch_reading_ease": 0.0,
             "flesch_kincaid_grade": 0.0,

@@ -93,7 +93,7 @@ def main() -> int:
     parser.add_argument("--max_new_tokens", type=int, default=MAX_NEW_TOKENS)
     args = parser.parse_args()
 
-    records = [json.loads(l) for l in (DATA_DIR / f"{args.split}.jsonl").open()]
+    records = [json.loads(line) for line in (DATA_DIR / f"{args.split}.jsonl").open()]
     if args.n_sample:
         records = records[: args.n_sample]
 

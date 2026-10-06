@@ -25,6 +25,7 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import cast
 
 import pandas as pd
 import torch
@@ -165,7 +166,7 @@ def main() -> int:
     tokenizer.padding_side = "left"
 
     # Base model only, no LoRA adapter. See the module docstring.
-    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16).to(device).eval()
+    model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16).to(device).eval()  # type: ignore[arg-type]  # transformers stub rejects str ids
 
     df = pd.read_csv(PREDICTIONS_PATH).drop(columns=["true_label"])
     print(f"Running independent LLM review on {len(df)} escalated essays (base model, no adapter)")
@@ -179,7 +180,7 @@ def main() -> int:
             tokenize=False,
             add_generation_prompt=True,
         )
-        prompts.append(prompt)
+        prompts.append(cast(str, prompt))
 
     raw_outputs = generate_batch(model, tokenizer, device, prompts)
 
