@@ -1,0 +1,24 @@
+[tool.ruff]
+line-length = 120
+extend-exclude = ["ghost", "scripts/agent"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "BLE", "PLW", "RUF"]
+ignore = [
+    "RUF001",  # essay text and prompts contain typographic characters
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["data", "evaluation", "fairness", "hitl", "stage1", "stage2", "drift", "viz"]
+
+[tool.mypy]
+ignore_missing_imports = true
+explicit_package_bases = true
+exclude = ["^ghost/", "^tests/", "^scripts/agent/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = ["slow: tests that load models or large data"]

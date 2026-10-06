@@ -5,14 +5,14 @@
 PY ?= python3
 
 setup:
-	$(PY) -m pip install -r requirements.txt
+	$(PY) -m pip install -r requirements-dev.txt
 	pre-commit install
 
 lint:
-	ruff check . --exclude ghost
+	ruff check .
 
 typecheck:
-	mypy --ignore-missing-imports --explicit-package-bases --exclude ghost .
+	mypy .
 
 test:
 	pytest -q
