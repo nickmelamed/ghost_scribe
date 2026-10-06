@@ -257,7 +257,7 @@ def test_prepare_builds_round_two_data_without_leaking_eval_rows(tmp_path, monke
     assert not train_texts & set(val_r2["text"])
     reviewed = set(pd.read_csv(processed / "hitl_corrections_human.csv")["text"])
     assert not reviewed & set(val_r2["text"])
-    for name in r2.EVAL_GROUPS + ("val_r2",):
+    for name in (*r2.EVAL_GROUPS, "val_r2"):
         assert (exp / "stage2_data" / f"{name}.jsonl").exists()
         assert (exp / "groups" / f"{name}.csv").exists()
     for name in ("test_new_source", "unseen_source"):
