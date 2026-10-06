@@ -60,11 +60,18 @@ verdicts may skip review, since clearing takes no action against a
 student. This keeps a human on every accusatory path.
 (`stage2/build_review_queue.py`, `stage2/confidence.py`)
 
-## D13. Human-gate rate of 20%, calibrated on the escalated test split
-The lowest-confidence dangerous error (predicted human, actually AI) sat
-at the 16th percentile, so 20% adds margin. This uses test-split errors to
-set a parameter, which conflicts with keeping test untouched.
-Status: marked for change. To be recalibrated on val, see SPEC 6.1.
+## D13. Human-gate rate calibrated on val, with a 5-point margin
+The gate rate is the smallest fraction of "Human-written" verdicts, least
+confident first, that includes every val error where Stage 2 said human and
+the essay was AI, plus 5 points. Ground truth is available only because the
+data is simulated, and it is used only to set the rate. The test split gets
+a read-only check and is never tuned on.
+
+This replaces an earlier 20% rate that was set from test-split errors, which
+conflicted with keeping test untouched. On val the old rate missed 1 of 9
+errors, and the val-calibrated rate is 41.6% (see SPEC 6.1 for the numbers).
+The margin is a fixed amount, not tuned, since there are only a handful of
+errors. (`stage2/build_review_queue.py`, `results/review_gate.json`)
 
 ## D14. Review queue comes from the val split
 Keeps the test split clean for evaluation. (`hitl/review_app.py`)

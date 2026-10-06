@@ -78,8 +78,11 @@ verdict.
 - `confidence.py`: two-way teacher-forced log-probability of
   "Label: AI-generated" vs "Label: Human-written".
 - `build_review_queue.py`: every "AI-generated" verdict goes to the
-  queue. Only the least-confident 20% of "Human-written" verdicts do.
-  The 20% was calibrated using the escalated test split (see DECISIONS).
+  queue. Only the least-confident fraction of "Human-written" verdicts do.
+  The fraction is calibrated on the escalated val split (the smallest rate
+  that queues every val error where Stage 2 said human and the essay was
+  AI, plus a 5-point margin). The test split only gets a read-only check.
+  Both are recorded in `results/review_gate.json` (see D13).
 
 ### Evaluation (`evaluation/`)
 - `evaluate.py` (Stage 1 only) and `evaluate_combined.py` (Stage 1+2,
@@ -124,13 +127,23 @@ but is unfinished and will be redone).
 Confirmed by the author: markings in sections 2 and 4 are fine as drafted
 (so rule 4 is guarded, and ESL gap and escalation rate stay unguarded).
 
-1. **Test-set contamination: to be fixed.** `build_review_queue.py` sets
+1. **Test-set contamination: fixed.** `build_review_queue.py` used to set
    the human-review gate rate (20%) from the escalated *test* split's
-   errors. Planned fix: calibrate on val instead, then report the gate's
-   behavior on test without tuning on it. This changes behavior and
-   results, so it is a separate commit after the standards are installed,
-   not part of the style cleanup. Numbers that depend on it must be
-   regenerated and logged, with the before and after both recorded.
+   errors. The rate is now calibrated on val, and test only gets a check
+   that is never tuned on.
+   - Before (20%, set from test): the gate queued 7 of 7 dangerous errors
+     on test, but only 8 of 9 on val. The val queue had 676 of 1,280
+     escalated essays (525 AI verdicts plus 151 human verdicts).
+   - After (val-calibrated): the needed rate on val is 36.6%, because one
+     error had 0.994 confidence. With the 5-point margin the gate rate is
+     41.6%. The val queue has 838 of 1,280 (525 plus 313), and all 9 val
+     errors are queued. On test the same rate queues 7 of 7 errors with
+     872 of 1,374 essays in the queue.
+   - The test result is weak evidence. Every test error sat below the 17th
+     percentile, so any rate above about 17% would have caught all 7. With
+     9 and 7 errors in total, the rate and the margin are noisy estimates.
+   - Cost: the review queue is about 24% larger, and confidence gating still
+     cannot promise to catch every confident mistake.
 2. **99.3% on escalated test rows: checked, not explained by duplicates.**
    Read-only check on existing CSVs:
    - Exact text overlap: train/test 1, train/val 1, val/test 0. The

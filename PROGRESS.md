@@ -17,9 +17,6 @@ regenerate `results/` and record the before and after (`/refresh-results`).
 The characterization tests are the before-state, and any test that changes
 should change on purpose.
 
-- [ ] Fix test-set contamination. `stage2/build_review_queue.py` sets the
-  20% human-review gate from the escalated test split. Calibrate it on val
-  instead. See docs/SPEC.md 6.1 and D13.
 - [ ] Remove near-duplicates across splits (proposed threshold: at least 80%
   of 8-word shingles shared with a train essay) and the 2 exact-text
   overlaps. Log removed rows per source and split.
@@ -32,6 +29,11 @@ should change on purpose.
   and the full README with the ethics section.
 
 ## Done
+
+- [x] Fix test-set contamination. The human-review gate is now calibrated on
+  val (41.6%, was 20% set from test). Queue is 838 of 1,280 val essays, was
+  676. Details in docs/SPEC.md 6.1 and D13, numbers in
+  `results/review_gate.json`.
 
 - [x] Build phases 0 to 5 of the original spec (data, Stage 1, fairness,
   Stage 2, combined evaluation, review app), as of commit 8b3fe44.
