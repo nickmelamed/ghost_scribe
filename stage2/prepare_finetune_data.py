@@ -127,6 +127,32 @@ def score_and_band(df: pd.DataFrame, xgb, t_low: float, t_high: float) -> pd.Dat
     return df
 
 
+def build_records(
+    escalated: pd.DataFrame,
+    with_target: bool,
+    top_features: list[str],
+    direction_for_ai: dict[str, int],
+    pop_mean: pd.Series,
+    pop_std: pd.Series,
+) -> list[dict]:
+    """Build one prompt record per escalated row, with a training target if asked."""
+    records = []
+    for _, row in escalated.iterrows():
+        record = {
+            "text": row["text"],
+            "label": int(row["label"]),
+            "generation_source": row["generation_source"],
+            "system": SYSTEM_PROMPT,
+            "user": build_user_message(row["text"]),
+        }
+        if with_target:
+            rationale = build_rationale(row, int(row["label"]), top_features, direction_for_ai, pop_mean, pop_std)
+            label_word = "AI-generated" if row["label"] == 1 else "Human-written"
+            record["target"] = f"Label: {label_word}\nRationale: {rationale}"
+        records.append(record)
+    return records
+
+
 def main() -> int:
     xgb = joblib.load(MODELS_DIR / "xgb.joblib")
     thresholds = json.loads((MODELS_DIR / "escalation_thresholds.json").read_text())
@@ -148,21 +174,7 @@ def main() -> int:
         df = score_and_band(df, xgb, t_low, t_high)
         escalated = df[df["stage1_band"] == "escalate"].reset_index(drop=True)
 
-        records = []
-        for _, row in escalated.iterrows():
-            user_msg = build_user_message(row["text"])
-            record = {
-                "text": row["text"],
-                "label": int(row["label"]),
-                "generation_source": row["generation_source"],
-                "system": SYSTEM_PROMPT,
-                "user": user_msg,
-            }
-            if split == "train":
-                rationale = build_rationale(row, int(row["label"]), top_features, direction_for_ai, pop_mean, pop_std)
-                label_word = "AI-generated" if row["label"] == 1 else "Human-written"
-                record["target"] = f"Label: {label_word}\nRationale: {rationale}"
-            records.append(record)
+        records = build_records(escalated, split == "train", top_features, direction_for_ai, pop_mean, pop_std)
 
         out_path = OUT_DIR / f"{split}.jsonl"
         with out_path.open("w") as f:

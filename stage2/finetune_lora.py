@@ -11,6 +11,7 @@ requirements.txt, which only installs bitsandbytes on Linux.
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -107,7 +108,16 @@ class MPSCacheClearCallback(TrainerCallback):
             torch.mps.empty_cache()
 
 
-def main() -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data-dir", type=Path, default=DATA_DIR, help="folder holding train.jsonl")
+    parser.add_argument("--adapter-dir", type=Path, default=ADAPTER_DIR, help="where to save the adapter")
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    data_dir, adapter_dir = args.data_dir, args.adapter_dir
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -121,7 +131,7 @@ def main() -> int:
     # grad_fn and backward silently fails to save memory (or errors).
     model.enable_input_require_grads()
 
-    train_dataset = EscalatedSFTDataset(DATA_DIR / "train.jsonl", tokenizer)
+    train_dataset = EscalatedSFTDataset(data_dir / "train.jsonl", tokenizer)
     print(f"Training on {len(train_dataset)} escalated examples")
 
     # Batch size kept small with gradient checkpointing on: an earlier full
@@ -129,8 +139,8 @@ def main() -> int:
     # (MPS activation memory for a 3B model does not shed between steps
     # the way CUDA's allocator does) and swapped hard, slowing ~5x. See
     # results/metrics_comparison.md / conversation log for the diagnosis.
-    checkpoint_dir = ROOT / "stage2" / "adapters" / "_checkpoints"
-    args = TrainingArguments(
+    checkpoint_dir = adapter_dir.parent / "_checkpoints"
+    train_args = TrainingArguments(
         output_dir=str(checkpoint_dir),
         per_device_train_batch_size=2,
         gradient_accumulation_steps=8,
@@ -149,7 +159,7 @@ def main() -> int:
 
     trainer = Trainer(
         model=model,
-        args=args,
+        args=train_args,
         train_dataset=train_dataset,
         data_collator=lambda batch: collate_fn(batch, tokenizer.pad_token_id),
         callbacks=[MPSCacheClearCallback(every_n_steps=10)],
@@ -160,10 +170,10 @@ def main() -> int:
         print(f"Resuming from checkpoint: {resume}")
     trainer.train(resume_from_checkpoint=resume)
 
-    ADAPTER_DIR.mkdir(parents=True, exist_ok=True)
-    model.save_pretrained(str(ADAPTER_DIR))
-    tokenizer.save_pretrained(str(ADAPTER_DIR))
-    print(f"Saved LoRA adapter to {ADAPTER_DIR}")
+    adapter_dir.mkdir(parents=True, exist_ok=True)
+    model.save_pretrained(str(adapter_dir))
+    tokenizer.save_pretrained(str(adapter_dir))
+    print(f"Saved LoRA adapter to {adapter_dir}")
     return 0
 
 

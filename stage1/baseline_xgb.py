@@ -19,8 +19,8 @@ def load_split(name: str) -> pd.DataFrame:
     return pd.read_csv(PROCESSED_DIR / f"{name}_features.csv")
 
 
-def train() -> XGBClassifier:
-    train_df = load_split("train")
+def fit(train_df: pd.DataFrame) -> XGBClassifier:
+    """Fit the Stage-1 XGBoost model on a frame of features and labels."""
     n_pos = int((train_df["label"] == 1).sum())
     n_neg = int((train_df["label"] == 0).sum())
     scale_pos_weight = n_neg / n_pos
@@ -38,6 +38,10 @@ def train() -> XGBClassifier:
     )
     clf.fit(train_df[FEATURE_COLUMNS], train_df["label"])
     return clf
+
+
+def train() -> XGBClassifier:
+    return fit(load_split("train"))
 
 
 def main() -> int:

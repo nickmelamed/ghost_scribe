@@ -34,7 +34,7 @@ LABEL_RE = re.compile(r"Label:\s*(AI-generated|Human-written)", re.IGNORECASE)
 RATIONALE_RE = re.compile(r"Rationale:\s*(.*)", re.IGNORECASE | re.DOTALL)
 
 
-def load_model():
+def load_model(adapter_dir: Path = ADAPTER_DIR):
     device = "mps" if torch.backends.mps.is_available() else "cpu"
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     if tokenizer.pad_token_id is None:
@@ -42,7 +42,7 @@ def load_model():
     tokenizer.padding_side = "left"
 
     base = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16)
-    model = PeftModel.from_pretrained(base, str(ADAPTER_DIR))
+    model = PeftModel.from_pretrained(base, str(adapter_dir))
     model = model.to(device).eval()
     return model, tokenizer, device
 
@@ -84,20 +84,27 @@ def generate_batch(model, tokenizer, device, records: list[dict], batch_size: in
     return outputs
 
 
-def main() -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--split", required=True, choices=["train", "val", "test", "esl_eval"])
+    parser.add_argument("--split", required=True, help="name of a JSONL file in the data folder, such as test")
     parser.add_argument("--n_sample", type=int, default=None)
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--max_new_tokens", type=int, default=MAX_NEW_TOKENS)
-    args = parser.parse_args()
+    parser.add_argument("--data-dir", type=Path, default=DATA_DIR)
+    parser.add_argument("--adapter-dir", type=Path, default=ADAPTER_DIR)
+    parser.add_argument("--out-dir", type=Path, default=OUT_DIR)
+    return parser.parse_args(argv)
 
-    records = [json.loads(line) for line in (DATA_DIR / f"{args.split}.jsonl").open()]
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+
+    records = [json.loads(line) for line in (args.data_dir / f"{args.split}.jsonl").open()]
     if args.n_sample:
         records = records[: args.n_sample]
 
     print(f"Running inference on {len(records)} escalated {args.split} rows (batch_size={args.batch_size})")
-    model, tokenizer, device = load_model()
+    model, tokenizer, device = load_model(args.adapter_dir)
     print(f"Model + adapter loaded on {device}")
 
     raw_outputs = generate_batch(model, tokenizer, device, records, args.batch_size, args.max_new_tokens)
@@ -122,7 +129,8 @@ def main() -> int:
         print(f"WARNING: {n_unparsed}/{len(out_df)} outputs did not match the expected Label: format")
 
     suffix = f"_sample{args.n_sample}" if args.n_sample else ""
-    out_path = OUT_DIR / f"stage2_predictions_{args.split}{suffix}.csv"
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = args.out_dir / f"stage2_predictions_{args.split}{suffix}.csv"
     out_df.to_csv(out_path, index=False)
     print(f"Wrote {out_path}")
 

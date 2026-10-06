@@ -36,3 +36,6 @@ hitl/llm_reviews.jsonl
 # Scratch copies made by repo skills
 results/_before/
 hitl/archive/
+
+# Experiment outputs (retrained models and intermediate data)
+experiments/
