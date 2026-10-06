@@ -24,7 +24,7 @@ style:
 	$(PY) scripts/agent/check_style.py --changed .
 
 numbers:
-	$(PY) scripts/agent/check_numbers.py README.md --sources results/phase2_metrics.json results/phase4_metrics.json
+	$(PY) scripts/agent/check_numbers.py README.md --sources $(wildcard results/*.json)
 
 # The fast checks the Stop hook runs before Claude may end a turn. Keep the
 # whole target under a few minutes.

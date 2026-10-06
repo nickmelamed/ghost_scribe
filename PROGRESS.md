@@ -7,23 +7,33 @@ cleanup phases below are separate.
 
 ## Now
 
-- [ ] Review and merge `chore/agent-standards`, then decide the order of the
-  behavior changes in "Next".
+- [ ] HITL pass, then round 2. Everything else is built, tested and documented.
+  See "HITL, then round 2" under Next. The review app has been smoke-tested.
+
 
 ## Next
 
-Behavior changes agreed in Phase 1. Each changes reported numbers, so
-regenerate `results/` and record the before and after (`/refresh-results`).
-The characterization tests are the before-state, and any test that changes
-should change on purpose.
+HITL, then round 2. The earlier behavior changes (review-gate calibration,
+near-duplicate removal, the prompt-held-out check) are done and recorded
+under Done.
 
-- [ ] Redo the HITL pass from scratch on a fresh queue (`/hitl-round`).
-  Archive the unfinished `hitl/reviews.jsonl` first.
-- [ ] Build phases 6, 7 and 8 from docs/SPEC.md: round-2 retraining with a
-  held-out source and the corrected labels, drift monitoring, trend plots,
-  and the full README with the ethics section.
+- [ ] Redo the HITL pass from scratch on a fresh queue (`/hitl-round`). It
+  archives the unfinished `hitl/reviews.jsonl` first, shows the queue size
+  (823 essays from the cleaned val split), and starts the review app. The
+  review itself is yours.
+- [ ] Run round 2 (`/round2`). It refuses to start without the reviewed
+  corrections. Expect about 7 hours of LoRA training and about 2 hours of
+  inference.
+- [ ] After round 2: fill the TBD cells in the README from
+  `results/round2.md`, record the result in docs/SPEC.md and
+  docs/DECISIONS.md, rerun `drift.monitor --tag round2`, `viz.trend_plots`
+  and `make numbers`.
 
 ## Done
+
+- [x] Phase 8: trend plots, cost per decision, and the full README with the
+  ethics and limitations section. `make numbers` checks every README number
+  against `results/*.json`. Round-2 cells are TBD.
 
 - [x] Round 2 pipeline (`evaluation/round2.py`) and `round2` skill, built and
   tested. It needs the HITL corrections and about 9 hours of compute to run.

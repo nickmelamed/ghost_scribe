@@ -1,0 +1,20 @@
+{
+  "round1": {
+    "escalation_rate": 0.21724872929988523,
+    "review_rate": 0.1398589932775865,
+    "gap_stage1": 0.01992311089001153,
+    "gap_auto_flag": 0.0005164035526583014,
+    "gap_combined": 0.0008336494145303464,
+    "stage1_only_accuracy": 0.9611411706837186,
+    "stage1_plus_2_accuracy": 0.9936055090998525,
+    "escalated_stage2_accuracy": 0.9932075471698113,
+    "cost": {
+      "stage1": 1,
+      "stage2": 1.086243646499426,
+      "review": 3.4964748319396626,
+      "total": 5.582718478439089,
+      "stage1_only_total": 1
+    }
+  },
+  "round2": null
+}

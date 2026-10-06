@@ -166,6 +166,7 @@ def plot_cost(round1: dict, round2: dict | None, path: Path) -> None:
 
 def main(results_dir: Path = RESULTS_DIR, figures_dir: Path = FIGURES_DIR) -> list[Path]:
     round1, round2 = load_rounds(results_dir)
+    (results_dir / "trend_inputs.json").write_text(json.dumps({"round1": round1, "round2": round2}, indent=2) + "\n")
     figures_dir.mkdir(parents=True, exist_ok=True)
     paths = [figures_dir / "rates.png", figures_dir / "fairness_gap.png", figures_dir / "cost_per_decision.png"]
     for plot, path in zip((plot_rates, plot_gap, plot_cost), paths, strict=True):

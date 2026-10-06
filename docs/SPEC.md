@@ -284,6 +284,15 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
    compared on the same essays. The word-count column issue from 6.5 is kept,
    so the two rounds differ only in data.
 
+9. **Trend plots, cost per decision and README (Phase 8) are built.**
+   `viz/trend_plots.py` draws the escalation and review share, the ESL gap and
+   the cost per essay, each on a single axis, with round 2 shown as a pending
+   slot until `results/round2.json` exists. Colors came from a validated
+   palette, and the charts were rendered and read before commit. Cost uses the
+   illustrative units of 1, 5 and 25. The README reports round 1 in full and
+   marks round 2 TBD. `make numbers` checks every README number against the
+   generated JSON files, and was shown to fail on a planted wrong number.
+
 ## 7. Decisions on scope (author, Phase 1)
 
 1. **Remove near-duplicates across splits.** Done, see 6.4. Near-duplicate
