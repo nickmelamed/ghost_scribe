@@ -48,7 +48,8 @@ should change on purpose.
 - [x] Repo-wide style cleanup of comments and docs. Code unchanged.
 - [x] 82 characterization tests, `pyproject.toml`, ruff and mypy clean.
   `make agent-check` runs in the stop gate.
-- [x] Repo skills: train-stage2, refresh-results, hitl-round, refresh-data.
+- [x] Repo skills: train-stage2, refresh-results, hitl-round, refresh-data,
+  prompt-holdout.
 
 ## Open questions for the owner
 
