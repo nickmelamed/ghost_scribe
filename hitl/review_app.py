@@ -1,21 +1,20 @@
 """Teacher-facing HITL review queue (Streamlit).
 
 Shows each essay in the confidence-gated review queue (from the val
-split — kept separate from the test split, which stays untouched for
+split, kept separate from the test split so that stays untouched for
 evaluation) along with Stage 2's suggested label and rationale, and lets
 the teacher record the final determination. The queue is not the full
-set of Stage-1-escalated essays: see stage2/build_review_queue.py — every
-Stage-2 "AI-generated" verdict is included regardless of confidence
-(CLAUDE.md requires human confirmation before any accusatory action),
-but confident "Human-written" verdicts are auto-cleared without review
+set of Stage-1-escalated essays: see stage2/build_review_queue.py. Every
+Stage-2 "AI-generated" verdict is included regardless of confidence,
+since a human must confirm before any accusatory action, but confident "Human-written" verdicts are auto-cleared without review
 (no action is taken on those either way, so no confirmation is needed).
 
 This is a decision-support tool, not an automated accusation system: no
 verdict shown here is final until a human confirms it below, and nothing
 in this app takes any action on a student's behalf. The ground-truth
 label this project happens to know (since the dataset is simulated) is
-deliberately dropped before display and never used anywhere in this file
-— a real deployment wouldn't have it, and showing it here would defeat
+deliberately dropped before display and never used anywhere in this file.
+A real deployment wouldn't have it, and showing it here would defeat
 the point of a blind review.
 
 Run with:
@@ -36,7 +35,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # stage2/build_review_queue.py): every Stage-2 "AI-generated" verdict,
 # plus only the least-confident "Human-written" verdicts. Confident
 # auto-clears never enter this file at all, since no review is required
-# for them (no action is taken either way) — this is not the full
+# for them (no action is taken either way). This is not the full
 # escalated pool.
 PREDICTIONS_PATH = ROOT / "data" / "processed" / "stage2_review_queue_val.csv"
 REVIEWS_PATH = ROOT / "hitl" / "reviews.jsonl"
@@ -56,7 +55,7 @@ def load_queue() -> pd.DataFrame:
     df = pd.read_csv(PREDICTIONS_PATH)
     # Ground truth exists only because this project's data is simulated.
     # Drop it immediately so it can never end up on screen or in a
-    # decision — a real teacher reviewing real essays wouldn't have it.
+    # decision, since a real teacher reviewing real essays wouldn't have it.
     df = df.drop(columns=["true_label"])
     return df.reset_index(drop=True)
 

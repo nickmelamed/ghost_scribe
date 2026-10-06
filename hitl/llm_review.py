@@ -1,13 +1,13 @@
 """Independent LLM review pass over Stage-1-escalated essays, as a
 point of comparison alongside real human review (hitl/review_app.py).
 
-Uses the BASE Qwen2.5-3B-Instruct model — no LoRA adapter — specifically
+Uses the BASE Qwen2.5-3B-Instruct model, with no LoRA adapter, specifically
 so it is not the same model being asked to grade its own homework: Stage
 2 is this same base model *plus* a LoRA adapter fine-tuned on escalated
 cases, so it would be a close-to-circular check to use it here too. The
 base model sees the essay and Stage 2's suggested verdict + rationale
-and is asked to independently agree, overturn, and tag failure modes —
-the same task the human reviewer app gives a teacher — but it is an LLM
+and is asked to independently agree, overturn, and tag failure modes.
+This is the same task the human reviewer app gives a teacher, but it is an LLM
 opinion, not a human one, and should never be reported as the latter.
 
 Output: hitl/llm_reviews.jsonl, schema-compatible with hitl/reviews.jsonl
@@ -45,21 +45,21 @@ BATCH_SIZE = 8
 # Prompt-engineering history (see conversation/commit log for full
 # numbers), kept here so this isn't silently re-litigated later:
 #   v1 (no rubric, "academic-integrity triage" framing): 61.7% accuracy,
-#     but degenerate — defaulted to "Human-written" on 96.6% of cases.
-#   v2 (this version — neutral framing, explicit stylometric rubric,
+#     but degenerate, defaulting to "Human-written" on 96.6% of cases.
+#   v2 (this version, with neutral framing, explicit stylometric rubric,
 #     debiasing instruction, reasoning-before-answer): ~64% accuracy,
-#     9% unparsed, and — importantly — non-degenerate, balanced
+#     9% unparsed, and importantly non-degenerate, with balanced
 #     predictions. The best-calibrated version tested.
 #   v3 (v2 + two worked few-shot examples): looked better on the surface
 #     (75.8%) but that was fallback contamination from a truncation bug
 #     (52% unparsed, silently falling back to Stage 2's own ~99%-accurate
 #     label). Once fixed and fully isolated from fallback rows, true
-#     accuracy was 56.5% — barely above chance, and biased toward
-#     over-predicting "AI-generated" — i.e. few-shot examples made a
+#     accuracy was 56.5%, barely above chance, and biased toward
+#     over-predicting "AI-generated". Few-shot examples made a
 #     non-fine-tuned model *worse*, not better. Reverted.
 # Conclusion: an off-the-shelf 3B instruct model, no matter how it's
 # prompted, tops out well below Stage 2's 99.2% fine-tuned accuracy on
-# this task. Keep this as a documented comparison baseline — do not feed
+# this task. Keep this as a documented comparison baseline. Do not feed
 # its output into Phase 6 retraining.
 SYSTEM_PROMPT = (
     "You are analyzing a student essay for stylistic evidence of AI "
@@ -98,7 +98,7 @@ SYSTEM_PROMPT = (
 
 ANALYSIS_RE = re.compile(r"Analysis:\s*(.*?)(?:\n *Determination:|\Z)", re.DOTALL)
 # Substring match, not exact: the model sometimes hedges ("Possible
-# AI-generated") — still a usable answer as long as one of the two
+# AI-generated"), which is still a usable answer as long as one of the two
 # labels appears in the Determination line.
 DETERMINATION_RE = re.compile(r"Determination:\s*(.*?)(?:\n|$)")
 TAG_RE = re.compile(r"Failure tag:\s*(.*?)(?:\n|$)")
@@ -164,7 +164,7 @@ def main() -> int:
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
-    # Base model only — deliberately no LoRA adapter, see module docstring.
+    # Base model only, no LoRA adapter. See the module docstring.
     model = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16).to(device).eval()
 
     df = pd.read_csv(PREDICTIONS_PATH).drop(columns=["true_label"])

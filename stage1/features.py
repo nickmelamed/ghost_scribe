@@ -3,7 +3,7 @@
 Stage 1 is deliberately classical: no language model is used, so there is
 no true perplexity. Instead we approximate the "how surprising/repetitive
 is this text" signal with an n-gram burstiness proxy (coefficient of
-variation of within-document bigram frequencies) — documented here as an
+variation of within-document bigram frequencies), documented here as an
 approximation, not a substitute for LM perplexity.
 
 Feature groups (see FEATURE_COLUMNS for the exact list):
@@ -12,7 +12,7 @@ Feature groups (see FEATURE_COLUMNS for the exact list):
   - variance:       sentence_length_std   (sentence-length variance proxy)
   - lexical:        type_token_ratio
   - burstiness:      bigram_burstiness    (n-gram repetition proxy for
-                                            perplexity; see module docstring)
+                                            perplexity, see module docstring)
   - POS ratios:      noun_ratio, verb_ratio, adj_ratio, adv_ratio,
                       pronoun_ratio, det_ratio, adp_ratio, conj_ratio
   - punctuation:      comma_rate, period_rate, exclamation_rate,

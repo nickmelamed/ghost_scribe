@@ -8,14 +8,14 @@ Schema of the raw file (44,868 rows, no nulls, no duplicate texts):
     text            str   the essay
     label           int   0 = human, 1 = AI-generated
     prompt_name     str   which essay prompt/topic was answered
-    source          str   dataset provenance; for label==1 this is the
+    source          str   dataset provenance. For label==1 this is the
                            generating model, for label==0 it is either
                            "persuade_corpus" or "train_essays" (both human)
     RDizzl3_seven   bool  a community-added quality flag from the source
-                           dataset, unrelated to our labeling; unused here
+                           dataset, unrelated to our labeling and unused here
 
 What this script does:
-1. Drops 3 rows where source=="train_essays" and label==1 — these are
+1. Drops 3 rows where source=="train_essays" and label==1. These are
    AI-generated but the specific generating model is not recorded, so
    they cannot be assigned a generation source. (Everything else is
    unambiguous.)
@@ -27,13 +27,12 @@ What this script does:
    downstream stylometric feature extraction (stage1/features.py) will
    build on.
 4. Holds out two entire generation sources (see HELD_OUT_SOURCES below)
-   as unseen data, standing in for "a new AI model appears later" per
-   CLAUDE.md — NOT real chronological drift, since this dataset has no
-   timestamp axis. These rows are written to held_out.csv and excluded
-   from train/val/test.
+   as unseen data, standing in for "a new AI model appears later". This is
+   NOT real chronological drift, since this dataset has no timestamp axis.
+   These rows are written to held_out.csv and excluded from train/val/test.
 5. Splits the remaining ("seen") pool into train/val/test (70/15/15),
-   stratified by generation_source so every remaining source — including
-   the small ones — appears in all three splits.
+   stratified by generation_source so every remaining source, including
+   the small ones, appears in all three splits.
 """
 
 from __future__ import annotations

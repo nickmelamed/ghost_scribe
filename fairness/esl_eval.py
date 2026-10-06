@@ -1,8 +1,8 @@
 """False-positive-rate check on non-native-English (ESL) writing.
 
 Compares Stage 1's false-positive rate on the ELLIPSE ESL eval subset
-(fairness/data_prep_esl.py — real English Language Learner essays, all
-genuinely human-written) against the general test set's human essays.
+(built by fairness/data_prep_esl.py from real English Language Learner
+essays, all genuinely human-written) against the general test set's human essays.
 Two FPR variants are reported:
 
   - fpr_threshold: P(predicted AI | true human) using the standard 0.5
@@ -18,8 +18,8 @@ Scope limitation: "ESL" here means the ELLIPSE corpus's specific
 population (8th-12th grade English Language Learners in a US school
 system), not the full space of non-native English writers this fairness
 concern is generally about (e.g. adult L2 writers, writers educated
-outside the US). Real, not-proxy data for the population it covers — see
-fairness/data_prep_esl.py and the README ethics section.
+outside the US). It is real, not proxy, data for the population it covers.
+See fairness/data_prep_esl.py and the README ethics section.
 """
 
 from __future__ import annotations

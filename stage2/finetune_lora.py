@@ -1,11 +1,11 @@
 """LoRA fine-tune a small instruction-tuned model on Stage-1's escalated
-(ambiguous) training cases only (stage2/data/train.jsonl — see
-prepare_finetune_data.py; never the full dataset, per CLAUDE.md).
+(ambiguous) training cases only (stage2/data/train.jsonl, see
+prepare_finetune_data.py, never the full dataset).
 
 Model: Qwen2.5-3B-Instruct (open weights, no license gate). Runs on MPS
-(Apple Silicon) in bf16; 4-bit bitsandbytes quantization is skipped here
+(Apple Silicon) in bf16. 4-bit bitsandbytes quantization is skipped here
 because bitsandbytes doesn't support the MPS backend and this machine
-(64GB unified memory) doesn't need it to fit a 3B model — see
+(64GB unified memory) doesn't need it to fit a 3B model. See
 requirements.txt, which only installs bitsandbytes on Linux.
 """
 
@@ -74,8 +74,8 @@ class EscalatedSFTDataset(Dataset):
 
 def collate_fn(batch: list[dict], pad_token_id: int, pad_to: int = MAX_LENGTH) -> dict:
     """Pads every batch to a FIXED length (MAX_LENGTH), not the batch's own
-    max — deliberately. Dynamic per-batch padding gives MPS a new tensor
-    shape almost every step; over ~200 steps this fragmented the MPS
+    max, deliberately. Dynamic per-batch padding gives MPS a new tensor
+    shape almost every step, and over ~200 steps this fragmented the MPS
     allocator badly enough that resident memory grew from ~20GB to ~45GB+
     and step time blew up from ~15s to 200-1000s+ (see git history / the
     conversation this was diagnosed in). Fixed shapes let MPS reuse the
@@ -117,7 +117,7 @@ def main() -> int:
     model = get_peft_model(model, LORA_CONFIG)
     model.print_trainable_parameters()
     # Needed for gradient checkpointing to work with a frozen base model +
-    # LoRA adapters — without this the checkpointed activations have no
+    # LoRA adapters. Without this the checkpointed activations have no
     # grad_fn and backward silently fails to save memory (or errors).
     model.enable_input_require_grads()
 

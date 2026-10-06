@@ -1,10 +1,10 @@
 """Build Stage-2 fine-tuning/eval data from Stage-1's escalated (ambiguous
-middle-band) cases only — never the full dataset (see CLAUDE.md Do NOT).
+middle-band) cases only, never the full dataset.
 
 For each split (train/val/test), scores rows with the Stage-1 XGBoost
 model, applies the calibrated escalation bands, and keeps only the
 "escalate" rows. Escalated train rows get a supervised fine-tuning target
-(true label + a short templated rationale); escalated val/test rows are
+(true label + a short templated rationale). Escalated val/test rows are
 saved without a target completion, for use at inference time (Phase 3
 infer.py) and combined-pipeline evaluation (Phase 4).
 
@@ -14,7 +14,7 @@ pick the 2 stylometric features (among the 4 most important to the
 XGBoost model) whose value most strongly points, in the direction the
 training population associates with that row's true label, and phrase a
 one-sentence cue from them. This is a templated heuristic explanation for
-teacher context, not a verified causal or linguistic analysis — documented
+teacher context, not a verified causal or linguistic analysis, documented
 as such in the README ethics section.
 """
 

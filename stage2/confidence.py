@@ -4,20 +4,20 @@ two-way scoring, to build a second-tier human review queue.
 Stage 2 gets ~99.2% of escalated cases right (Phase 4). Routing every
 escalated verdict to a human wastes their time on cases Stage 2already
 got right. This computes, for each escalated case, the model's own
-probability mass on "Label: AI-generated" vs "Label: Human-written" —
-not read off greedy-decode token likelihood, but computed directly by
+probability mass on "Label: AI-generated" vs "Label: Human-written".
+It is not read off greedy-decode token likelihood, but computed directly by
 teacher-forcing both candidate continuations through the model and
 comparing their total log-probability. That gives a clean two-way
 classification confidence, independent of whatever text the model
 happened to generate for the rationale.
 
-IMPORTANT — per CLAUDE.md's explicit no-automated-accusation rule, this
+IMPORTANT: this project forbids automated accusation, so this
 confidence score must only be used to skip human review on
 "Human-written" verdicts (auto-clearing takes no action against a
 student, so it carries none of the risk the human-confirmation
 requirement exists for). Every "AI-generated" verdict still requires
 human confirmation regardless of confidence. That policy is applied in
-stage2/build_review_queue.py, not here — this module only measures
+stage2/build_review_queue.py, not here. This module only measures
 confidence.
 """
 
@@ -64,7 +64,7 @@ def score_candidate(model, tokenizer, device, prompts: list[str], candidate_text
 
     Left-pads each (prompt + candidate) sequence to the batch's max
     length so the candidate tokens always occupy the same final
-    positions regardless of prompt length — makes indexing them uniform
+    positions regardless of prompt length, which makes indexing them uniform
     across a batch of variable-length prompts.
     """
     cand_ids = tokenizer(candidate_text, add_special_tokens=False)["input_ids"]
@@ -84,7 +84,7 @@ def score_candidate(model, tokenizer, device, prompts: list[str], candidate_text
         input_ids_t = torch.tensor(input_ids, dtype=torch.long).to(device)
         attn_t = torch.tensor(attn, dtype=torch.long).to(device)
 
-        # Only the last n_cand positions predict the candidate tokens —
+        # Only the last n_cand positions predict the candidate tokens, so
         # slice those out BEFORE computing log_softmax over the vocab.
         # The full (unsliced) logits tensor is [batch, seq_len, ~152k
         # vocab]; for a ~600-token sequence that's several GB per batch,

@@ -7,17 +7,17 @@ a proxy: every essay was written by an 8th-12th grade English Language
 Learner (ELL) in a US school as part of the ELLIPSE study, with human
 proficiency ratings across six dimensions (cohesion, syntax, vocabulary,
 phraseology, grammar, conventions). We only use the essay text and the
-fact of ELL authorship — the proficiency scores themselves are not used
+fact of ELL authorship. The proficiency scores themselves are not used
 here.
 
 All essays in this subset are genuinely human-written (label=0). Running
 Stage 1 on them and checking how many get misclassified as AI-generated
 gives a real false-positive-rate-on-non-native-English-writing measurement,
-not an approximation of one — the approximation, if any, is that ELL
+not an approximation of one. The approximation, if any, is that ELL
 status is a proxy for "non-native English writer" in the broader sense
-CLAUDE.md's fairness check is concerned with (ELL specifically means
-enrolled in English-learner services in a US school; it does not cover
-e.g. adult L2 English writers outside that system). This scope limitation
+the fairness check is concerned with. ELL specifically means
+enrolled in English-learner services in a US school, and it does not cover
+adult L2 English writers outside that system. This scope limitation
 is documented in the README ethics section.
 
 Output: data/processed/esl_eval.csv with columns matching the main

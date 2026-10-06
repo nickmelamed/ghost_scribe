@@ -1,10 +1,10 @@
 """Turn raw HITL review decisions into labeled training examples for
 Phase 6 (flywheel round 2).
 
-The reviewer's final determination (reviewer_label) becomes the label —
+The reviewer's final determination (reviewer_label) becomes the label,
 never Stage 2's suggestion and never this project's internal ground
-truth (which neither the human review app nor the LLM reviewer ever see;
-see hitl/review_app.py and hitl/llm_review.py). This is the actual point
+truth. Neither the human review app nor the LLM reviewer ever sees it
+(see hitl/review_app.py and hitl/llm_review.py). This is the actual point
 of human-in-the-loop: the reviewer's call is what gets learned from,
 whether or not they agreed with the model.
 

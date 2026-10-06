@@ -43,9 +43,11 @@ def score_and_band(df: pd.DataFrame, xgb, t_low: float, t_high: float) -> pd.Dat
 
 
 def attach_stage2(df: pd.DataFrame, stage2_path: Path) -> pd.DataFrame:
-    """Join Stage-2 predictions onto df by essay text; fill missing/unparsed
-    Stage-2 outputs with the Stage-1 raw threshold decision as a documented
-    fallback (and report how often this happens — never silently)."""
+    """Join Stage-2 predictions onto df by essay text.
+
+    Missing or unparsed Stage-2 outputs fall back to the Stage-1 raw
+    threshold decision. The caller reports how often this happens.
+    """
     s2 = pd.read_csv(stage2_path)[["text", "stage2_pred_label"]]
     merged = df.merge(s2, on="text", how="left")
 

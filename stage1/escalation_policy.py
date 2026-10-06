@@ -1,11 +1,11 @@
 """Calibrate and apply Stage-1 escalation bands.
 
 XGBoost is used as the Stage-1 decision model (it beat logistic regression
-on validation AUC — see results/metrics_comparison.md), scored against
+on validation AUC, see results/metrics_comparison.md), scored against
 three bands:
   - confident-human: auto-clear, no further action
   - confident-AI:    auto-flag for teacher review (NOT an automated
-                      accusation — see CLAUDE.md; a human must confirm)
+                      accusation, a human must confirm)
   - ambiguous:        escalate to Stage 2
 
 Bands are calibrated on the validation set by taking the region of

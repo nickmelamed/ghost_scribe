@@ -5,7 +5,7 @@ training set that is almost entirely human essays (the Persuade corpus)
 plus a small set of GPT-generated essays, with no per-source labels for
 the many LLMs used in the hidden test set. That's unusable for this
 project, which needs real, labeled generation-source diversity to hold
-sources out and simulate "a new AI model appears later" (see CLAUDE.md).
+sources out and simulate "a new AI model appears later" (see docs/SPEC.md).
 
 Instead we use thedrcat/daigt-v2-train-dataset, the community-compiled
 DAIGT dataset that aggregates the competition's human essays with AI
