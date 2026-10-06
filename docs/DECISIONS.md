@@ -178,3 +178,15 @@ changed. A full retrain with the main run's hyperparameters changes only the
 data. The round-1 test essays stay the comparison group, minus any removed as
 near-duplicates, which `meta.json` counts. Costs per decision use the
 documented illustrative units of 1, 5 and 25 and are not real money.
+
+## D27. The review app keeps Stage 2's suggestion pre-selected
+The radio for the final determination defaults to Stage 2's suggested label,
+and the suggestion is shown above the form. A reviewer who presses Submit
+without changing anything records agreement, so some of the training labels
+in round 2 will be the model's own suggestion. The owner decided to keep it,
+accepting that anchoring risk. It is named in the README's ethics section.
+The record stores both the suggestion and the reviewer's label, so the
+agreement rate and the overturned cases can be measured afterward, and the
+count of reviewer labels that differ from the true label is in the round-2
+`meta.json`. Removing the default would force an explicit choice and is the
+fix if the agreement rate looks too high. (`hitl/review_app.py`)
