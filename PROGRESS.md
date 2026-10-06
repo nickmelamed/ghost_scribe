@@ -17,9 +17,6 @@ regenerate `results/` and record the before and after (`/refresh-results`).
 The characterization tests are the before-state, and any test that changes
 should change on purpose.
 
-- [ ] Remove near-duplicates across splits (proposed threshold: at least 80%
-  of 8-word shingles shared with a train essay) and the 2 exact-text
-  overlaps. Log removed rows per source and split.
 - [ ] Add a prompt-held-out evaluation and report it next to the main
   result. Re-check the 99.3% Stage-2 accuracy on escalated test rows.
 - [ ] Redo the HITL pass from scratch on a fresh queue (`/hitl-round`).
@@ -29,6 +26,11 @@ should change on purpose.
   and the full README with the ethics section.
 
 ## Done
+
+- [x] Remove near-duplicates from val, test and ESL (`data/dedup.py`). 228,
+  297 and 546 rows, all human. Headline metrics barely moved, the ESL gap
+  rose from +0.0176 to +0.0199, and 8.4% of the ESL set had been in train.
+  Thresholds are frozen until round 2. See docs/SPEC.md 6.4, D20 and D21.
 
 - [x] Fix test-set contamination. The human-review gate is now calibrated on
   val (41.6%, was 20% set from test). Queue is 838 of 1,280 val essays, was
@@ -45,6 +47,13 @@ should change on purpose.
 - [x] Repo skills: train-stage2, refresh-results, hitl-round, refresh-data.
 
 ## Open questions for the owner
+
+- Duplicate `word_count` and `char_count` columns in the feature files mean
+  the models use the preprocessing word count, not the feature function's.
+  Results are consistent, but fixing it means retraining. See docs/SPEC.md
+  6.5.
+- Recalibrate the escalation thresholds and retrain Stage 2 in round 2, since
+  they are frozen on the pre-dedup val.
 
 Carried over from the Phase 0 assessment.
 

@@ -46,6 +46,11 @@ verdict.
 - Holds out two sources (`falcon_180b_v1`, `llama_70b_v1`) into
   `held_out.csv`. Splits the rest 70/15/15, stratified by
   `generation_source`, seed 42.
+- `dedup.py` runs after preprocessing and before features. It drops val,
+  test and ESL rows with at least 80% of their 8-word shingles in one train
+  essay, and test rows that do the same against the kept val. It removes the
+  same essays from the derived files by text, and writes counts to
+  `results/dedup_report.json` (see 6.4 and D20).
 
 ### Stage 1 (`stage1/`)
 - `features.py`: 24 features (length, sentence-length std, type-token
@@ -168,16 +173,48 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
    round-2 data are in. Archive it (outside git, gitignored) rather than
    delete it, and review a fresh queue.
 
+4. **Near-duplicates: removed, with a larger finding about the ESL set.**
+   Overlap is the share of an essay's 8-word shingles found in one train
+   essay, and 0.8 sits in a sparse region of the overlap distribution.
+   - Removed: val 228 of 6,396, test 297 of 6,396 (236 near train plus 61
+     near the kept val), ESL 546 of 6,482. All were human essays. No AI
+     essay and no held-out essay was a near-duplicate.
+   - **ESL contamination.** 8.4% of the ELLIPSE fairness set was already in
+     Stage 1's training set, labeled human, and 538 of those 546 overlapped
+     at 0.95 or more. The baseline false-positive rate on ESL essays was
+     therefore measured partly on essays the model trained on.
+   - Effect on results, with thresholds, models and adapter frozen:
+     Stage-1 XGBoost test AUC 0.9924 to 0.9921, Stage-1+2 test accuracy
+     0.9939 to 0.9936, and Stage-2 accuracy on escalated test rows 0.9934 to
+     0.9932. Duplicates do not explain the 99.3%.
+   - The ESL false-positive rate at 0.5 rose from 0.0538 to 0.0569, and the
+     baseline gap from +0.0176 to +0.0199. That is in the expected direction,
+     but at these sample sizes the change is within noise.
+   - Escalation rate with the frozen thresholds is 0.2014 on val and 0.2172
+     on test, still inside 15-25%.
+   - Review gate on the cleaned val: needed rate 36.7%, gate rate 41.7%,
+     queue 823 of 1,242 (66.3%), 9 of 9 val errors queued and 7 of 7 on test.
+   - Limits: light edits can stay under the cutoff, and 47 val, 64 test and
+     17 ESL rows with an overlap from 0.5 to 0.8 were kept. The general
+     human test set probably also contains English-learner writers, since
+     ELLIPSE and Persuade overlap, so it is not a clean non-ESL group.
+5. **Duplicate `word_count` and `char_count` columns in the feature files.**
+   `stage1.features` concatenates the preprocessing columns with its own, so
+   the CSVs hold both, and pandas reads the second pair as `word_count.1`
+   and `char_count.1`. Models use the first pair, which is the whitespace
+   split from preprocessing. It differs from the feature function's token
+   count by 4.3 words on average (about 1-2%). `char_count` is identical.
+   Train and evaluation are consistent, so the reported results stand, but
+   `extract_features` alone disagrees with the trained model's `word_count`.
+   Not fixed, because fixing it means retraining every model. Decide before
+   round 2.
+
 ## 7. Decisions on scope (author, Phase 1)
 
-1. **Remove near-duplicates across splits.** Near-duplicates inflate
-   every metric, so they are removed: near-duplicate train/test pairs inflate every metric, Stage 1
-   included. Plan: drop test and val rows that share at least 80% of their
-   8-word shingles with a train essay (threshold is a proposal, to be
-   confirmed when implemented), and drop the 2 exact-text overlaps. Log
-   how many rows were removed per source and split, and regenerate all
-   downstream results. This changes the numbers in `results/`, so record
-   before and after.
+1. **Remove near-duplicates across splits.** Done, see 6.4. Near-duplicate
+   train/val/test pairs were removed at an overlap of at least 80%, the
+   exact-text overlaps are covered by that rule, and the removals are logged
+   per split, source and label.
 2. **Add a prompt-held-out evaluation.** Hold out whole essay prompts from
    Stage 1 and Stage 2 training and evaluate on them, to test whether the
    Stage-2 gain survives on unseen topics. Report it next to the main

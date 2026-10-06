@@ -115,3 +115,22 @@ Fallbacks are logged in the results table, not silently dropped.
 ## D19. Raw data, processed splits, adapters, and reviews stay out of git
 These are gitignored, and `data/download.py` documents how to fetch
 the data. The results cannot be reproduced from the repo alone.
+
+## D20. Remove near-duplicates from val, test and ESL at 80% shingle overlap
+An essay is a near-duplicate when at least 80% of its 8-word shingles occur
+in one train essay. The cutoff sits in a sparse part of the overlap
+distribution, between 0.4 and 0.8 there are few rows and above 0.8 there are
+many. Train is the reference and is left alone, test is also checked against
+the kept val, and the held-out sources had no overlap. Removal is applied to
+the derived files by text, which is valid only while the models, thresholds
+and adapter are unchanged. Light edits can stay under the cutoff, so the
+report counts the borderline rows kept. (`data/dedup.py`,
+`results/dedup_report.json`)
+
+## D21. Freeze the escalation thresholds after near-duplicate removal
+The thresholds were calibrated on the old val. Keeping them means the only
+thing that changed is the evaluation data, so the effect of the duplicates
+can be read directly, and it avoids retraining Stage 2 for a small shift.
+The escalation rate on the cleaned val is reported as measured. The
+thresholds get recalibrated and Stage 2 retrained in round 2, which retrains
+both stages anyway. (`stage1/models/escalation_thresholds.json`)

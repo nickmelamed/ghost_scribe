@@ -44,6 +44,8 @@ def main() -> int:
         "xgb": {"val": evaluate_model(xgb, val), "test": evaluate_model(xgb, test)},
     }
 
+    xgb_val_proba = xgb.predict_proba(val[FEATURE_COLUMNS])[:, 1]
+    val_escalation_rate = escalation_rate(assign_band(xgb_val_proba, t_low, t_high))
     xgb_test_proba = xgb.predict_proba(test[FEATURE_COLUMNS])[:, 1]
     test_bands = assign_band(xgb_test_proba, t_low, t_high)
     test_escalation_rate = escalation_rate(test_bands)
@@ -82,10 +84,15 @@ def main() -> int:
     lines.append(f"| t_low | {t_low:.4f} | — |")
     lines.append(f"| t_high | {t_high:.4f} | — |")
     lines.append(
-        f"| escalation rate | {thresholds['achieved_escalation_rate_val']:.4f} | "
+        f"| escalation rate | {val_escalation_rate:.4f} | "
         f"{test_escalation_rate:.4f} |"
     )
     lines.append("")
+    lines.append(
+        "Rates are measured on the current val and test splits with the saved "
+        "thresholds. The thresholds were calibrated to an escalation rate of "
+        f"{thresholds['achieved_escalation_rate_val']:.4f} on val at calibration time.\n"
+    )
 
     lines.append("### Baseline fairness gap — false positive rate on non-native English writing\n")
     lines.append(
@@ -121,7 +128,11 @@ def main() -> int:
 
     out = {
         "model_metrics": model_metrics,
-        "escalation": {**thresholds, "test_escalation_rate": test_escalation_rate},
+        "escalation": {
+            **thresholds,
+            "val_escalation_rate": val_escalation_rate,
+            "test_escalation_rate": test_escalation_rate,
+        },
         "fairness": fairness,
     }
     (ROOT / "results" / "phase2_metrics.json").write_text(json.dumps(out, indent=2))
