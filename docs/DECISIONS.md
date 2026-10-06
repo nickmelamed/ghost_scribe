@@ -145,3 +145,14 @@ models are scored on held-out and seen prompts, which separates prompt shift
 from the effect of retraining. It is a single draw, so the result carries
 that variance, and k-fold over prompts was not run because each Stage-2 fit
 takes about 4.5 hours on this machine. (`evaluation/prompt_holdout.py`)
+
+## D23. Drift is measured against the pooled round-1 training data, with a noise level
+AI sources are compared with the AI essays in train and the human control
+with the human essays in train. Seen sources use their test rows and
+unseen sources use all their rows. Because one source differs from a pooled
+mixture even when the models trained on it, seen sources are also compared
+with their own train rows, and each batch gets the 95th percentile of the
+score PSI that a same-size bootstrap sample reaches. The 0.1 and 0.2
+thresholds are the conventional ones and are reported as such, but they flag
+most sources, so the report adds routing shares (cleared, escalated,
+flagged) as the decision-relevant signal. (`drift/monitor.py`)

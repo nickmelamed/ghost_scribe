@@ -239,6 +239,36 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
      2. Why a language model reading the whole essay does so much better than
      the 24 summary features on these rows is still not explained.
 
+7. **Drift monitoring across generation sources (Phase 7).** `drift/monitor.py`
+   computes PSI and KS on the 24 features and on the Stage-1 score for each
+   source, with the round-1 models. Each source stands in for a step in time,
+   which is a substitution and not real drift. The full table is in
+   `results/drift_round1.md`.
+   - **Feature-level flags do not separate new from old sources.** Against
+     the pooled AI reference, nearly every source shows 17 to 23 features over
+     0.1, including sources the models trained on. A single generator differs
+     in style from the mixture. Stage-1 score drift and routing are the more
+     useful signals.
+   - **Seen sources.** Score PSI against the pooled AI reference is major for
+     6 of 14 seen sources, but 5 of those 6 have fewer than 210 test essays
+     and their noise level is high, and against their own train rows the score
+     PSI is at most 0.295. Stage 1 clears (misses) 0.8% or fewer of the
+     sources with at least 150 essays. It clears 7.7% of cohere-command and
+     5.8% of palm-text-bison1, which have 52 essays each, so that is 4 and 3
+     essays.
+   - **llama_70b_v1 (unseen) drifts.** Score PSI is 0.509 (major, against a
+     noise level of 0.015), Stage 1 clears 4.7% of its 1,172 essays with no
+     review, and it escalates 44.3% of them, against about 19% for most
+     seen sources. This is the clearest case of a new generator shifting
+     Stage 1's behavior, and round 2 introduces it.
+   - **falcon_180b_v1 (unseen) mostly does not.** Score PSI is 0.037 (below
+     the 0.1 threshold, above its 0.016 noise level), 0.9% is cleared and
+     24.6% is escalated. It behaves like the seen sources, so it stays unseen
+     in round 2 as a generalization test.
+   - Limits: the reference is pooled, the batches differ in size by a factor
+     of 40, and PSI with ten quantile bins is coarse on the near-binary
+     Stage-1 score.
+
 ## 7. Decisions on scope (author, Phase 1)
 
 1. **Remove near-duplicates across splits.** Done, see 6.4. Near-duplicate

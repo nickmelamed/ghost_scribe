@@ -1,0 +1,1982 @@
+{
+  "psi_thresholds": {
+    "moderate": 0.1,
+    "major": 0.2
+  },
+  "n_bins": 10,
+  "reference_rows": {
+    "train_ai": 10687,
+    "train_human": 19159
+  },
+  "batches": {
+    "human (control)": {
+      "kind": "human control",
+      "n": 3809,
+      "score_psi": 0.005942132723340059,
+      "score_level": "none",
+      "score_psi_null_p95": 0.0045343071499459415,
+      "score_psi_above_noise": true,
+      "score_ks": 0.0293233459900335,
+      "features_moderate_or_worse": 0,
+      "features_major": 0,
+      "top_features": [
+        "word_count",
+        "char_count",
+        "noun_ratio"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 0.01013074890315519,
+          "ks": 0.041590464761246726
+        },
+        "word_count": {
+          "psi": 0.010264876094604544,
+          "ks": 0.0408678224677157
+        },
+        "sentence_count": {
+          "psi": 0.006864212253910512,
+          "ks": 0.028659667777757525
+        },
+        "avg_word_length": {
+          "psi": 0.002481014120633736,
+          "ks": 0.018181601175861345
+        },
+        "avg_sentence_length": {
+          "psi": 0.0016651220914318506,
+          "ks": 0.018261256812471927
+        },
+        "sentence_length_std": {
+          "psi": 0.0034809504313093984,
+          "ks": 0.026120046566687927
+        },
+        "type_token_ratio": {
+          "psi": 0.0038368944409739743,
+          "ks": 0.020621423315636433
+        },
+        "bigram_burstiness": {
+          "psi": 0.003411862017891662,
+          "ks": 0.019272512045671153
+        },
+        "noun_ratio": {
+          "psi": 0.007235548730711079,
+          "ks": 0.04262480957774001
+        },
+        "verb_ratio": {
+          "psi": 0.00201140436053089,
+          "ks": 0.021223191298047173
+        },
+        "adj_ratio": {
+          "psi": 0.004980532721578957,
+          "ks": 0.013625265874496195
+        },
+        "adv_ratio": {
+          "psi": 0.004742018437093255,
+          "ks": 0.012497315750298221
+        },
+        "pronoun_ratio": {
+          "psi": 0.006436235921143608,
+          "ks": 0.03725029454977169
+        },
+        "det_ratio": {
+          "psi": 0.005386972208258373,
+          "ks": 0.029171530266997425
+        },
+        "adp_ratio": {
+          "psi": 0.0026307629523797597,
+          "ks": 0.0204943278348928
+        },
+        "conj_ratio": {
+          "psi": 0.0037704144123442145,
+          "ks": 0.02368195100702858
+        },
+        "comma_rate": {
+          "psi": 0.0019378115854855986,
+          "ks": 0.013593091191069107
+        },
+        "period_rate": {
+          "psi": 0.0025217133796576145,
+          "ks": 0.011599151514681494
+        },
+        "exclamation_rate": {
+          "psi": 5.976091140078176e-05,
+          "ks": 0.004324713208533781
+        },
+        "question_rate": {
+          "psi": 2.103030789644662e-05,
+          "ks": 0.006421644759128431
+        },
+        "semicolon_rate": {
+          "psi": 1.0330999105547428e-05,
+          "ks": 0.003999047311460613
+        },
+        "flesch_reading_ease": {
+          "psi": 0.0034370383394312144,
+          "ks": 0.025592233765902472
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.006865404967553059,
+          "ks": 0.03064520750485178
+        },
+        "gunning_fog": {
+          "psi": 0.005262071825362639,
+          "ks": 0.033158258566362175
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.78472039905487,
+        "escalate": 0.2110790233657128,
+        "auto_flag": 0.00420057757941717
+      }
+    },
+    "NousResearch/Llama-2-7b-chat-hf": {
+      "kind": "seen AI source",
+      "n": 60,
+      "score_psi": 0.0886761151917888,
+      "score_level": "none",
+      "score_psi_null_p95": 0.3264897542854132,
+      "score_psi_above_noise": false,
+      "score_ks": 0.10982034247216244,
+      "features_moderate_or_worse": 22,
+      "features_major": 22,
+      "top_features": [
+        "word_count",
+        "sentence_count",
+        "char_count"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 5.3459903491300915,
+          "ks": 0.48189388977262093
+        },
+        "word_count": {
+          "psi": 5.916194650907613,
+          "ks": 0.5644131499329403
+        },
+        "sentence_count": {
+          "psi": 5.469612696746038,
+          "ks": 0.6173528586132684
+        },
+        "avg_word_length": {
+          "psi": 2.491217060896486,
+          "ks": 0.39044165808926734
+        },
+        "avg_sentence_length": {
+          "psi": 2.7374299244141276,
+          "ks": 0.4858020648139484
+        },
+        "sentence_length_std": {
+          "psi": 1.7729723727045283,
+          "ks": 0.5471694582202675
+        },
+        "type_token_ratio": {
+          "psi": 3.3559462923095573,
+          "ks": 0.421006830728923
+        },
+        "bigram_burstiness": {
+          "psi": 0.864970704678465,
+          "ks": 0.1587255544119023
+        },
+        "noun_ratio": {
+          "psi": 5.005677310621705,
+          "ks": 0.6168850004678581
+        },
+        "verb_ratio": {
+          "psi": 2.8475853139527203,
+          "ks": 0.5041093540438539
+        },
+        "adj_ratio": {
+          "psi": 1.0502211492383695,
+          "ks": 0.17769876173544183
+        },
+        "adv_ratio": {
+          "psi": 0.2722090639681861,
+          "ks": 0.25763700446024773
+        },
+        "pronoun_ratio": {
+          "psi": 4.369808980989155,
+          "ks": 0.6054910950999657
+        },
+        "det_ratio": {
+          "psi": 2.403214904181736,
+          "ks": 0.38432675212875456
+        },
+        "adp_ratio": {
+          "psi": 1.5883815639664012,
+          "ks": 0.45369140076728737
+        },
+        "conj_ratio": {
+          "psi": 3.356718313850732,
+          "ks": 0.49021084807086485
+        },
+        "comma_rate": {
+          "psi": 0.9713138057525864,
+          "ks": 0.23796045039144126
+        },
+        "period_rate": {
+          "psi": 1.5450883933744142,
+          "ks": 0.44260004366676026
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.1266024141480303
+        },
+        "question_rate": {
+          "psi": 0.07913388789282291,
+          "ks": 0.12040485324849504
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.01759146626742769
+        },
+        "flesch_reading_ease": {
+          "psi": 3.941182997285768,
+          "ks": 0.5240401110383331
+        },
+        "flesch_kincaid_grade": {
+          "psi": 2.702523757439575,
+          "ks": 0.5076650759489723
+        },
+        "gunning_fog": {
+          "psi": 3.5129597579599086,
+          "ks": 0.572686441470946
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.18333333333333332,
+        "auto_flag": 0.8166666666666667
+      },
+      "vs_own_train": {
+        "score_psi": 0.10607174046500115,
+        "score_level": "moderate",
+        "features_moderate_or_worse": 20
+      }
+    },
+    "chat_gpt_moth": {
+      "kind": "seen AI source",
+      "n": 364,
+      "score_psi": 0.042049038255280266,
+      "score_level": "none",
+      "score_psi_null_p95": 0.042957779754493365,
+      "score_psi_above_noise": false,
+      "score_ks": 0.049583452011635776,
+      "features_moderate_or_worse": 18,
+      "features_major": 13,
+      "top_features": [
+        "sentence_count",
+        "char_count",
+        "word_count"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 3.11725351169598,
+          "ks": 0.6275964841745697
+        },
+        "word_count": {
+          "psi": 2.9763717712272197,
+          "ks": 0.6642279775057917
+        },
+        "sentence_count": {
+          "psi": 4.188442298690346,
+          "ks": 0.6703512637825354
+        },
+        "avg_word_length": {
+          "psi": 0.2955659610850301,
+          "ks": 0.17426482004941818
+        },
+        "avg_sentence_length": {
+          "psi": 0.44140285836773,
+          "ks": 0.27163175553743535
+        },
+        "sentence_length_std": {
+          "psi": 0.11948919672466947,
+          "ks": 0.12164029009261534
+        },
+        "type_token_ratio": {
+          "psi": 2.471171681521195,
+          "ks": 0.5473531568085699
+        },
+        "bigram_burstiness": {
+          "psi": 1.4707529894090428,
+          "ks": 0.48087642683881104
+        },
+        "noun_ratio": {
+          "psi": 0.14145508842437515,
+          "ks": 0.08708562421016805
+        },
+        "verb_ratio": {
+          "psi": 0.03475560941488334,
+          "ks": 0.04738194807905671
+        },
+        "adj_ratio": {
+          "psi": 0.14345009026629585,
+          "ks": 0.174501576836189
+        },
+        "adv_ratio": {
+          "psi": 0.05292829094963602,
+          "ks": 0.07474033872929728
+        },
+        "pronoun_ratio": {
+          "psi": 0.1092713836724224,
+          "ks": 0.12669392925779194
+        },
+        "det_ratio": {
+          "psi": 0.2720273059745918,
+          "ks": 0.12110148203064836
+        },
+        "adp_ratio": {
+          "psi": 0.03475426853796135,
+          "ks": 0.04752024900335933
+        },
+        "conj_ratio": {
+          "psi": 0.08730542943258383,
+          "ks": 0.08993775944276551
+        },
+        "comma_rate": {
+          "psi": 0.07045835915272165,
+          "ks": 0.1371176544985846
+        },
+        "period_rate": {
+          "psi": 0.19559294139307964,
+          "ks": 0.18110351798477553
+        },
+        "exclamation_rate": {
+          "psi": 0.20504778170310323,
+          "ks": 0.11561340315901936
+        },
+        "question_rate": {
+          "psi": 0.2068981061585968,
+          "ks": 0.14000192284556467
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.08268698644856587
+        },
+        "flesch_reading_ease": {
+          "psi": 0.5340718589599057,
+          "ks": 0.23282934899852648
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.5918209967891245,
+          "ks": 0.24927918997817008
+        },
+        "gunning_fog": {
+          "psi": 0.4168213086834052,
+          "ks": 0.2327172686955601
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.008241758241758242,
+        "escalate": 0.19230769230769232,
+        "auto_flag": 0.7994505494505495
+      },
+      "vs_own_train": {
+        "score_psi": 0.05156184762371516,
+        "score_level": "none",
+        "features_moderate_or_worse": 0
+      }
+    },
+    "cohere-command": {
+      "kind": "seen AI source",
+      "n": 52,
+      "score_psi": 1.8799056883045946,
+      "score_level": "major",
+      "score_psi_null_p95": 0.40799101773125723,
+      "score_psi_above_noise": true,
+      "score_ks": 0.48938861737121303,
+      "features_moderate_or_worse": 21,
+      "features_major": 18,
+      "top_features": [
+        "det_ratio",
+        "conj_ratio",
+        "adj_ratio"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 0.17322805279060915,
+          "ks": 0.1159604407943512
+        },
+        "word_count": {
+          "psi": 0.20075241937877814,
+          "ks": 0.11127466152262633
+        },
+        "sentence_count": {
+          "psi": 0.22873064828737902,
+          "ks": 0.16307375603716956
+        },
+        "avg_word_length": {
+          "psi": 0.29482981431110217,
+          "ks": 0.167898093298112
+        },
+        "avg_sentence_length": {
+          "psi": 0.19123099508628438,
+          "ks": 0.15558262734738826
+        },
+        "sentence_length_std": {
+          "psi": 0.9278387085486643,
+          "ks": 0.17908710079104018
+        },
+        "type_token_ratio": {
+          "psi": 0.9261649646212028,
+          "ks": 0.22141746622424074
+        },
+        "bigram_burstiness": {
+          "psi": 0.9922505099889781,
+          "ks": 0.21024825272977232
+        },
+        "noun_ratio": {
+          "psi": 0.9525165576805925,
+          "ks": 0.19397038817830434
+        },
+        "verb_ratio": {
+          "psi": 0.47155756528442333,
+          "ks": 0.2390773117590747
+        },
+        "adj_ratio": {
+          "psi": 1.1172094983769696,
+          "ks": 0.3176954747320613
+        },
+        "adv_ratio": {
+          "psi": 0.33870763208417215,
+          "ks": 0.2357645161986886
+        },
+        "pronoun_ratio": {
+          "psi": 0.27032283399051715,
+          "ks": 0.25681093492453083
+        },
+        "det_ratio": {
+          "psi": 3.3680275670262203,
+          "ks": 0.5978111436612419
+        },
+        "adp_ratio": {
+          "psi": 0.6562493538199915,
+          "ks": 0.30196464431984227
+        },
+        "conj_ratio": {
+          "psi": 1.4311002890866027,
+          "ks": 0.36210421000352694
+        },
+        "comma_rate": {
+          "psi": 0.33440367783002567,
+          "ks": 0.21253176037025567
+        },
+        "period_rate": {
+          "psi": 0.3397790877009673,
+          "ks": 0.15175698728145626
+        },
+        "exclamation_rate": {
+          "psi": 0.002457519752302758,
+          "ks": 0.030736480699051993
+        },
+        "question_rate": {
+          "psi": 0.011226476665205144,
+          "ks": 0.09757181622532052
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.02943367570952493
+        },
+        "flesch_reading_ease": {
+          "psi": 0.23262526056134536,
+          "ks": 0.11422216783871131
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.17855240203456924,
+          "ks": 0.09932628427060919
+        },
+        "gunning_fog": {
+          "psi": 0.33445474917382095,
+          "ks": 0.20548869582742513
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.07692307692307693,
+        "escalate": 0.5576923076923077,
+        "auto_flag": 0.36538461538461536
+      },
+      "vs_own_train": {
+        "score_psi": 0.29532996944711387,
+        "score_level": "major",
+        "features_moderate_or_worse": 21
+      }
+    },
+    "darragh_claude_v6": {
+      "kind": "seen AI source",
+      "n": 150,
+      "score_psi": 0.15049976115880592,
+      "score_level": "moderate",
+      "score_psi_null_p95": 0.12847561094403212,
+      "score_psi_above_noise": true,
+      "score_ks": 0.17320046162003677,
+      "features_moderate_or_worse": 23,
+      "features_major": 20,
+      "top_features": [
+        "type_token_ratio",
+        "bigram_burstiness",
+        "avg_word_length"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 1.3037730690544844,
+          "ks": 0.23442500233929073
+        },
+        "word_count": {
+          "psi": 0.7730201032491484,
+          "ks": 0.23190480646268052
+        },
+        "sentence_count": {
+          "psi": 0.7813309682218337,
+          "ks": 0.1538099248307913
+        },
+        "avg_word_length": {
+          "psi": 2.510788567066188,
+          "ks": 0.5069554910951
+        },
+        "avg_sentence_length": {
+          "psi": 0.31493511165189736,
+          "ks": 0.24886310470665296
+        },
+        "sentence_length_std": {
+          "psi": 0.16916561930829385,
+          "ks": 0.13418920183400385
+        },
+        "type_token_ratio": {
+          "psi": 4.495330172780702,
+          "ks": 0.6560793487414616
+        },
+        "bigram_burstiness": {
+          "psi": 3.151569300807341,
+          "ks": 0.5712161192726366
+        },
+        "noun_ratio": {
+          "psi": 1.9018604585841785,
+          "ks": 0.4037409937307009
+        },
+        "verb_ratio": {
+          "psi": 0.24255274445160774,
+          "ks": 0.16639718037491025
+        },
+        "adj_ratio": {
+          "psi": 0.4465844687579727,
+          "ks": 0.29078319453541684
+        },
+        "adv_ratio": {
+          "psi": 0.26192913685499514,
+          "ks": 0.20893858582077912
+        },
+        "pronoun_ratio": {
+          "psi": 1.7236985676179537,
+          "ks": 0.35212750693989586
+        },
+        "det_ratio": {
+          "psi": 0.33217767755384875,
+          "ks": 0.15722029880540223
+        },
+        "adp_ratio": {
+          "psi": 0.13972846706518338,
+          "ks": 0.09346370980318766
+        },
+        "conj_ratio": {
+          "psi": 0.39568069135026945,
+          "ks": 0.30150276036305795
+        },
+        "comma_rate": {
+          "psi": 1.7881776811600198,
+          "ks": 0.46391254171735136
+        },
+        "period_rate": {
+          "psi": 0.5108396848843113,
+          "ks": 0.309732073235395
+        },
+        "exclamation_rate": {
+          "psi": 0.1826790240449493,
+          "ks": 0.10660241414803029
+        },
+        "question_rate": {
+          "psi": 0.2642288511371341,
+          "ks": 0.13373818658182834
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.028258631982782778
+        },
+        "flesch_reading_ease": {
+          "psi": 1.5040733383852283,
+          "ks": 0.37236081220174044
+        },
+        "flesch_kincaid_grade": {
+          "psi": 1.1112484214746905,
+          "ks": 0.2733439381179627
+        },
+        "gunning_fog": {
+          "psi": 0.951311857740655,
+          "ks": 0.2430142540781635
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.17333333333333334,
+        "auto_flag": 0.8266666666666667
+      },
+      "vs_own_train": {
+        "score_psi": 0.15809113097138477,
+        "score_level": "moderate",
+        "features_moderate_or_worse": 4
+      }
+    },
+    "darragh_claude_v7": {
+      "kind": "seen AI source",
+      "n": 150,
+      "score_psi": 0.3595693723282223,
+      "score_level": "major",
+      "score_psi_null_p95": 0.12847561094403212,
+      "score_psi_above_noise": true,
+      "score_ks": 0.23791397648233054,
+      "features_moderate_or_worse": 23,
+      "features_major": 21,
+      "top_features": [
+        "type_token_ratio",
+        "bigram_burstiness",
+        "avg_word_length"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 1.3726734632475155,
+          "ks": 0.25052057016312657
+        },
+        "word_count": {
+          "psi": 1.4644914702423577,
+          "ks": 0.2823336764293066
+        },
+        "sentence_count": {
+          "psi": 1.5128828842077806,
+          "ks": 0.215687595521038
+        },
+        "avg_word_length": {
+          "psi": 2.755891781501828,
+          "ks": 0.5671463772184274
+        },
+        "avg_sentence_length": {
+          "psi": 0.34501571951663107,
+          "ks": 0.21653098780449775
+        },
+        "sentence_length_std": {
+          "psi": 0.10929911972404965,
+          "ks": 0.13030785065967998
+        },
+        "type_token_ratio": {
+          "psi": 4.983883316850765,
+          "ks": 0.6651776301425407
+        },
+        "bigram_burstiness": {
+          "psi": 3.565727354216521,
+          "ks": 0.5748142603162721
+        },
+        "noun_ratio": {
+          "psi": 2.3637485730229724,
+          "ks": 0.3839499703689841
+        },
+        "verb_ratio": {
+          "psi": 0.29832423051477497,
+          "ks": 0.20013411933501768
+        },
+        "adj_ratio": {
+          "psi": 0.8937420186544146,
+          "ks": 0.41177505380368673
+        },
+        "adv_ratio": {
+          "psi": 0.6737030425987125,
+          "ks": 0.258920183400393
+        },
+        "pronoun_ratio": {
+          "psi": 1.849815661300597,
+          "ks": 0.37675493590343406
+        },
+        "det_ratio": {
+          "psi": 0.7580045627752885,
+          "ks": 0.12580892673341437
+        },
+        "adp_ratio": {
+          "psi": 0.14683857567625805,
+          "ks": 0.134468669099529
+        },
+        "conj_ratio": {
+          "psi": 0.4222887111442421,
+          "ks": 0.2533776239044322
+        },
+        "comma_rate": {
+          "psi": 1.5338496961372072,
+          "ks": 0.42700414834222267
+        },
+        "period_rate": {
+          "psi": 0.4274375676671006,
+          "ks": 0.283722903215745
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.1199357474813636
+        },
+        "question_rate": {
+          "psi": 0.705411600054991,
+          "ks": 0.14040485324849505
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.02159196531611607
+        },
+        "flesch_reading_ease": {
+          "psi": 1.7267280577037718,
+          "ks": 0.4750257321979976
+        },
+        "flesch_kincaid_grade": {
+          "psi": 1.2782717294507595,
+          "ks": 0.3522840834658931
+        },
+        "gunning_fog": {
+          "psi": 1.055986502801923,
+          "ks": 0.2688606094632108
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.006666666666666667,
+        "escalate": 0.08666666666666667,
+        "auto_flag": 0.9066666666666666
+      },
+      "vs_own_train": {
+        "score_psi": 0.09600884976536214,
+        "score_level": "none",
+        "features_moderate_or_worse": 5
+      }
+    },
+    "kingki19_palm": {
+      "kind": "seen AI source",
+      "n": 208,
+      "score_psi": 1.3707546805295308,
+      "score_level": "major",
+      "score_psi_null_p95": 0.07753117083526427,
+      "score_psi_above_noise": true,
+      "score_ks": 0.3669307965824761,
+      "features_moderate_or_worse": 21,
+      "features_major": 19,
+      "top_features": [
+        "flesch_reading_ease",
+        "avg_word_length",
+        "flesch_kincaid_grade"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 0.4183114023206158,
+          "ks": 0.2353690860930966
+        },
+        "word_count": {
+          "psi": 0.5936576445316335,
+          "ks": 0.2904211443090455
+        },
+        "sentence_count": {
+          "psi": 1.4701814802760738,
+          "ks": 0.39371702499802064
+        },
+        "avg_word_length": {
+          "psi": 3.5410871922397282,
+          "ks": 0.45581574666561103
+        },
+        "avg_sentence_length": {
+          "psi": 2.0711081619921794,
+          "ks": 0.500348644291051
+        },
+        "sentence_length_std": {
+          "psi": 0.0579427438328922,
+          "ks": 0.06537912704867888
+        },
+        "type_token_ratio": {
+          "psi": 1.6733594988551317,
+          "ks": 0.3306524461783188
+        },
+        "bigram_burstiness": {
+          "psi": 2.000562391751153,
+          "ks": 0.4095225327680647
+        },
+        "noun_ratio": {
+          "psi": 1.7514415431931682,
+          "ks": 0.3452851595396276
+        },
+        "verb_ratio": {
+          "psi": 0.08579098324449397,
+          "ks": 0.06786192426456306
+        },
+        "adj_ratio": {
+          "psi": 1.224466691362419,
+          "ks": 0.31059842655706793
+        },
+        "adv_ratio": {
+          "psi": 0.45046342524253935,
+          "ks": 0.22425655541239897
+        },
+        "pronoun_ratio": {
+          "psi": 0.8712915004771364,
+          "ks": 0.24751225428450097
+        },
+        "det_ratio": {
+          "psi": 0.9366329051136026,
+          "ks": 0.3366428298939761
+        },
+        "adp_ratio": {
+          "psi": 0.3556758919509514,
+          "ks": 0.2510319871015108
+        },
+        "conj_ratio": {
+          "psi": 0.9839723520161092,
+          "ks": 0.2761888095529435
+        },
+        "comma_rate": {
+          "psi": 0.10986186676043104,
+          "ks": 0.08409165341068592
+        },
+        "period_rate": {
+          "psi": 2.543044344567271,
+          "ks": 0.5409587313126659
+        },
+        "exclamation_rate": {
+          "psi": 0.2204095197448412,
+          "ks": 0.11105647767596871
+        },
+        "question_rate": {
+          "psi": 0.17523717712388692,
+          "ks": 0.1295481210097098
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.021427903059792253
+        },
+        "flesch_reading_ease": {
+          "psi": 4.027931023981391,
+          "ks": 0.45315075469117766
+        },
+        "flesch_kincaid_grade": {
+          "psi": 3.3596061485078375,
+          "ks": 0.5156696489624346
+        },
+        "gunning_fog": {
+          "psi": 2.555460987429222,
+          "ks": 0.3931358012250685
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.4375,
+        "auto_flag": 0.5625
+      },
+      "vs_own_train": {
+        "score_psi": 0.033671139084156074,
+        "score_level": "none",
+        "features_moderate_or_worse": 0
+      }
+    },
+    "llama2_chat": {
+      "kind": "seen AI source",
+      "n": 363,
+      "score_psi": 0.052218808237140306,
+      "score_level": "none",
+      "score_psi_null_p95": 0.043851605640888684,
+      "score_psi_above_noise": true,
+      "score_ks": 0.05615509278413233,
+      "features_moderate_or_worse": 23,
+      "features_major": 21,
+      "top_features": [
+        "sentence_count",
+        "flesch_reading_ease",
+        "pronoun_ratio"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 1.1528037221231655,
+          "ks": 0.19518861385360187
+        },
+        "word_count": {
+          "psi": 1.6568329546179064,
+          "ks": 0.16730916607572188
+        },
+        "sentence_count": {
+          "psi": 1.845461061241796,
+          "ks": 0.36237224443796573
+        },
+        "avg_word_length": {
+          "psi": 1.673570000577751,
+          "ks": 0.567779241069645
+        },
+        "avg_sentence_length": {
+          "psi": 0.615973051924505,
+          "ks": 0.33472505020775223
+        },
+        "sentence_length_std": {
+          "psi": 0.2572694562286383,
+          "ks": 0.19402090178819764
+        },
+        "type_token_ratio": {
+          "psi": 1.256168895593264,
+          "ks": 0.26487421575761705
+        },
+        "bigram_burstiness": {
+          "psi": 1.0385813334505107,
+          "ks": 0.20423180914687164
+        },
+        "noun_ratio": {
+          "psi": 1.3988720082408534,
+          "ks": 0.49267756892143355
+        },
+        "verb_ratio": {
+          "psi": 0.7341108307177224,
+          "ks": 0.3483089183557892
+        },
+        "adj_ratio": {
+          "psi": 0.4298714046570403,
+          "ks": 0.25707658000077843
+        },
+        "adv_ratio": {
+          "psi": 0.7241849761047361,
+          "ks": 0.3757906222667998
+        },
+        "pronoun_ratio": {
+          "psi": 1.829915461862353,
+          "ks": 0.5080091385713339
+        },
+        "det_ratio": {
+          "psi": 1.1283563638440994,
+          "ks": 0.35172853607315185
+        },
+        "adp_ratio": {
+          "psi": 0.10693062214240365,
+          "ks": 0.1445529583198969
+        },
+        "conj_ratio": {
+          "psi": 0.5083973428613675,
+          "ks": 0.25991569273551635
+        },
+        "comma_rate": {
+          "psi": 1.0058177956921481,
+          "ks": 0.3831982473492549
+        },
+        "period_rate": {
+          "psi": 0.10121301837164005,
+          "ks": 0.10460122375193359
+        },
+        "exclamation_rate": {
+          "psi": 1.1063222925769076,
+          "ks": 0.5640678242224726
+        },
+        "question_rate": {
+          "psi": 0.9012661330560963,
+          "ks": 0.5233561746062065
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.022748990109504597
+        },
+        "flesch_reading_ease": {
+          "psi": 1.8376774160800071,
+          "ks": 0.5882111089372247
+        },
+        "flesch_kincaid_grade": {
+          "psi": 1.706807836374606,
+          "ks": 0.5696759354134074
+        },
+        "gunning_fog": {
+          "psi": 1.6946226328666043,
+          "ks": 0.5665437346834457
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.19008264462809918,
+        "auto_flag": 0.8099173553719008
+      },
+      "vs_own_train": {
+        "score_psi": 0.025235320042453144,
+        "score_level": "none",
+        "features_moderate_or_worse": 0
+      }
+    },
+    "mistral7binstruct_v1": {
+      "kind": "seen AI source",
+      "n": 363,
+      "score_psi": 0.10000725152737001,
+      "score_level": "moderate",
+      "score_psi_null_p95": 0.043851605640888684,
+      "score_psi_above_noise": true,
+      "score_ks": 0.14546959940258508,
+      "features_moderate_or_worse": 19,
+      "features_major": 17,
+      "top_features": [
+        "type_token_ratio",
+        "bigram_burstiness",
+        "char_count"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 1.423137105146062,
+          "ks": 0.3607194034305989
+        },
+        "word_count": {
+          "psi": 1.38192503681351,
+          "ks": 0.33273839305806774
+        },
+        "sentence_count": {
+          "psi": 1.1556792954022148,
+          "ks": 0.22527872359018103
+        },
+        "avg_word_length": {
+          "psi": 0.6140914036217866,
+          "ks": 0.18414535721033842
+        },
+        "avg_sentence_length": {
+          "psi": 0.3004308114734378,
+          "ks": 0.12494158217509443
+        },
+        "sentence_length_std": {
+          "psi": 0.0823698326639719,
+          "ks": 0.11899011723777586
+        },
+        "type_token_ratio": {
+          "psi": 2.427300638726803,
+          "ks": 0.4022337584269243
+        },
+        "bigram_burstiness": {
+          "psi": 1.652024886159734,
+          "ks": 0.3041201676246803
+        },
+        "noun_ratio": {
+          "psi": 0.29007492405947355,
+          "ks": 0.1015375906620154
+        },
+        "verb_ratio": {
+          "psi": 0.09799285475499998,
+          "ks": 0.0960305265195659
+        },
+        "adj_ratio": {
+          "psi": 0.01987502866227532,
+          "ks": 0.036285685783376265
+        },
+        "adv_ratio": {
+          "psi": 0.13550975402623214,
+          "ks": 0.13895644691769127
+        },
+        "pronoun_ratio": {
+          "psi": 0.25547159342183323,
+          "ks": 0.10754525013139982
+        },
+        "det_ratio": {
+          "psi": 0.3095081238890288,
+          "ks": 0.11157759446674614
+        },
+        "adp_ratio": {
+          "psi": 0.053078636788418315,
+          "ks": 0.06643791883292727
+        },
+        "conj_ratio": {
+          "psi": 0.31920185046273947,
+          "ks": 0.19519789368458523
+        },
+        "comma_rate": {
+          "psi": 0.11431691791752915,
+          "ks": 0.10171622740844477
+        },
+        "period_rate": {
+          "psi": 0.25071775862254353,
+          "ks": 0.13661586732522535
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.11833795133811298
+        },
+        "question_rate": {
+          "psi": 0.3620815101742239,
+          "ks": 0.13996408189863274
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.017134692364580872
+        },
+        "flesch_reading_ease": {
+          "psi": 0.5770766577121419,
+          "ks": 0.18234842104964688
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.6965077681913412,
+          "ks": 0.18477690126337165
+        },
+        "gunning_fog": {
+          "psi": 0.5129822845861506,
+          "ks": 0.1545625449008489
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.1349862258953168,
+        "auto_flag": 0.8650137741046832
+      },
+      "vs_own_train": {
+        "score_psi": 0.047798821244713754,
+        "score_level": "none",
+        "features_moderate_or_worse": 0
+      }
+    },
+    "mistral7binstruct_v2": {
+      "kind": "seen AI source",
+      "n": 363,
+      "score_psi": 0.07593710458467094,
+      "score_level": "none",
+      "score_psi_null_p95": 0.043851605640888684,
+      "score_psi_above_noise": true,
+      "score_ks": 0.11649435824942178,
+      "features_moderate_or_worse": 19,
+      "features_major": 13,
+      "top_features": [
+        "noun_ratio",
+        "type_token_ratio",
+        "sentence_count"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 0.5270527112831382,
+          "ks": 0.17669777730003833
+        },
+        "word_count": {
+          "psi": 0.30359918383213513,
+          "ks": 0.14020123313487387
+        },
+        "sentence_count": {
+          "psi": 0.5974259730131787,
+          "ks": 0.25885676091108345
+        },
+        "avg_word_length": {
+          "psi": 0.42507281797169083,
+          "ks": 0.23167304268387146
+        },
+        "avg_sentence_length": {
+          "psi": 0.27214505256164134,
+          "ks": 0.1753828768043149
+        },
+        "sentence_length_std": {
+          "psi": 0.1262330727136669,
+          "ks": 0.16151906708828034
+        },
+        "type_token_ratio": {
+          "psi": 0.651424972312062,
+          "ks": 0.23531975848724318
+        },
+        "bigram_burstiness": {
+          "psi": 0.4252837078373319,
+          "ks": 0.17912754637917752
+        },
+        "noun_ratio": {
+          "psi": 0.8186461110691451,
+          "ks": 0.3365686432964435
+        },
+        "verb_ratio": {
+          "psi": 0.17208856141626516,
+          "ks": 0.16849930439933586
+        },
+        "adj_ratio": {
+          "psi": 0.07307686961367643,
+          "ks": 0.09736450222342174
+        },
+        "adv_ratio": {
+          "psi": 0.05736814967107706,
+          "ks": 0.05552019768102179
+        },
+        "pronoun_ratio": {
+          "psi": 0.5883488693313805,
+          "ks": 0.32009204561243143
+        },
+        "det_ratio": {
+          "psi": 0.19954519579465374,
+          "ks": 0.13666819526104812
+        },
+        "adp_ratio": {
+          "psi": 0.028154697272307586,
+          "ks": 0.05146052939889123
+        },
+        "conj_ratio": {
+          "psi": 0.22918019882527968,
+          "ks": 0.1525513993082917
+        },
+        "comma_rate": {
+          "psi": 0.17446274442550494,
+          "ks": 0.10743260329418536
+        },
+        "period_rate": {
+          "psi": 0.1287506988664216,
+          "ks": 0.10567201313817853
+        },
+        "exclamation_rate": {
+          "psi": 0.15773519723721707,
+          "ks": 0.10180902571827821
+        },
+        "question_rate": {
+          "psi": 0.018717051371776643,
+          "ks": 0.0629133874708363
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.005573054051664417
+        },
+        "flesch_reading_ease": {
+          "psi": 0.5397038781610668,
+          "ks": 0.2235194222995885
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.39422370953925034,
+          "ks": 0.18857467209330558
+        },
+        "gunning_fog": {
+          "psi": 0.4572214092349084,
+          "ks": 0.20304192859634052
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.008264462809917356,
+        "escalate": 0.2892561983471074,
+        "auto_flag": 0.7024793388429752
+      },
+      "vs_own_train": {
+        "score_psi": 0.04114660792204582,
+        "score_level": "none",
+        "features_moderate_or_worse": 0
+      }
+    },
+    "mistralai/Mistral-7B-Instruct-v0.1": {
+      "kind": "seen AI source",
+      "n": 60,
+      "score_psi": 0.1973965316790613,
+      "score_level": "moderate",
+      "score_psi_null_p95": 0.3264897542854132,
+      "score_psi_above_noise": false,
+      "score_ks": 0.15823118430491878,
+      "features_moderate_or_worse": 23,
+      "features_major": 23,
+      "top_features": [
+        "char_count",
+        "word_count",
+        "gunning_fog"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 4.728414908960776,
+          "ks": 0.6662081656841645
+        },
+        "word_count": {
+          "psi": 4.196469763893655,
+          "ks": 0.6632201116621441
+        },
+        "sentence_count": {
+          "psi": 2.278254589752976,
+          "ks": 0.2826471413867316
+        },
+        "avg_word_length": {
+          "psi": 1.2005246373149376,
+          "ks": 0.218903028601728
+        },
+        "avg_sentence_length": {
+          "psi": 2.570342196719419,
+          "ks": 0.4402280028695299
+        },
+        "sentence_length_std": {
+          "psi": 1.1643002721523592,
+          "ks": 0.2912307788278593
+        },
+        "type_token_ratio": {
+          "psi": 2.0047008979476084,
+          "ks": 0.40880976887807613
+        },
+        "bigram_burstiness": {
+          "psi": 2.078785079566795,
+          "ks": 0.4603412245407193
+        },
+        "noun_ratio": {
+          "psi": 2.390065823917089,
+          "ks": 0.34331430710208666
+        },
+        "verb_ratio": {
+          "psi": 2.522346048064641,
+          "ks": 0.4328904276223449
+        },
+        "adj_ratio": {
+          "psi": 0.37453074705595624,
+          "ks": 0.1434842955615857
+        },
+        "adv_ratio": {
+          "psi": 0.9837817709134076,
+          "ks": 0.2165434640217086
+        },
+        "pronoun_ratio": {
+          "psi": 2.8511751534781884,
+          "ks": 0.5358083029225538
+        },
+        "det_ratio": {
+          "psi": 2.3631158169929676,
+          "ks": 0.4443467140762921
+        },
+        "adp_ratio": {
+          "psi": 2.3957774902818176,
+          "ks": 0.481834627740869
+        },
+        "conj_ratio": {
+          "psi": 1.8765790303475351,
+          "ks": 0.3436558435482361
+        },
+        "comma_rate": {
+          "psi": 0.8734487977908331,
+          "ks": 0.19184991110695235
+        },
+        "period_rate": {
+          "psi": 1.7545166051112417,
+          "ks": 0.33806337918343154
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.1266024141480303
+        },
+        "question_rate": {
+          "psi": 0.705411600054991,
+          "ks": 0.15373818658182836
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.028258631982782778
+        },
+        "flesch_reading_ease": {
+          "psi": 2.754349000733268,
+          "ks": 0.42834908455756215
+        },
+        "flesch_kincaid_grade": {
+          "psi": 3.237963957827859,
+          "ks": 0.47961542060447276
+        },
+        "gunning_fog": {
+          "psi": 3.386816218151091,
+          "ks": 0.5573952777517857
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.2,
+        "auto_flag": 0.8
+      },
+      "vs_own_train": {
+        "score_psi": 0.10929379341365487,
+        "score_level": "moderate",
+        "features_moderate_or_worse": 20
+      }
+    },
+    "palm-text-bison1": {
+      "kind": "seen AI source",
+      "n": 52,
+      "score_psi": 3.2363246402000705,
+      "score_level": "major",
+      "score_psi_null_p95": 0.40799101773125723,
+      "score_psi_above_noise": true,
+      "score_ks": 0.5821324974267802,
+      "features_moderate_or_worse": 22,
+      "features_major": 22,
+      "top_features": [
+        "conj_ratio",
+        "bigram_burstiness",
+        "gunning_fog"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 1.3456182326357065,
+          "ks": 0.3551763105426435
+        },
+        "word_count": {
+          "psi": 1.5021836226982344,
+          "ks": 0.3860783410469945
+        },
+        "sentence_count": {
+          "psi": 1.4546050199054161,
+          "ks": 0.4127984395131396
+        },
+        "avg_word_length": {
+          "psi": 1.1829324301127286,
+          "ks": 0.27208830282658303
+        },
+        "avg_sentence_length": {
+          "psi": 0.4521508086528314,
+          "ks": 0.3457255760053552
+        },
+        "sentence_length_std": {
+          "psi": 0.3737784441141,
+          "ks": 0.171273869762688
+        },
+        "type_token_ratio": {
+          "psi": 2.2307973348833787,
+          "ks": 0.47270227666971376
+        },
+        "bigram_burstiness": {
+          "psi": 2.8876321716154587,
+          "ks": 0.5161303092902232
+        },
+        "noun_ratio": {
+          "psi": 0.9975949809581416,
+          "ks": 0.22489401213552052
+        },
+        "verb_ratio": {
+          "psi": 0.22287660922860358,
+          "ks": 0.12591502256515824
+        },
+        "adj_ratio": {
+          "psi": 1.3366987597863988,
+          "ks": 0.42054509072849117
+        },
+        "adv_ratio": {
+          "psi": 0.3462144099083712,
+          "ks": 0.21046238780401783
+        },
+        "pronoun_ratio": {
+          "psi": 1.259468212280291,
+          "ks": 0.2263875592920227
+        },
+        "det_ratio": {
+          "psi": 1.3825299315461703,
+          "ks": 0.38760067947398347
+        },
+        "adp_ratio": {
+          "psi": 0.2170662152762884,
+          "ks": 0.17139803211666216
+        },
+        "conj_ratio": {
+          "psi": 2.944164818625942,
+          "ks": 0.534511736041632
+        },
+        "comma_rate": {
+          "psi": 0.9837319618232419,
+          "ks": 0.2164167824315667
+        },
+        "period_rate": {
+          "psi": 1.204912514337968,
+          "ks": 0.34145906961009426
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.10559378396470187
+        },
+        "question_rate": {
+          "psi": 0.02587972756585364,
+          "ks": 0.2895987936457666
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.028258631982782778
+        },
+        "flesch_reading_ease": {
+          "psi": 2.082623621129782,
+          "ks": 0.38367426996134774
+        },
+        "flesch_kincaid_grade": {
+          "psi": 2.1435512728419472,
+          "ks": 0.4043571988972944
+        },
+        "gunning_fog": {
+          "psi": 2.6027151234192187,
+          "ks": 0.36729563596317594
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.057692307692307696,
+        "escalate": 0.7115384615384616,
+        "auto_flag": 0.23076923076923078
+      },
+      "vs_own_train": {
+        "score_psi": 0.23822312336753446,
+        "score_level": "major",
+        "features_moderate_or_worse": 23
+      }
+    },
+    "radek_500": {
+      "kind": "seen AI source",
+      "n": 75,
+      "score_psi": 0.41207825498940553,
+      "score_level": "major",
+      "score_psi_null_p95": 0.2571078510229146,
+      "score_psi_above_noise": true,
+      "score_ks": 0.20871838058700604,
+      "features_moderate_or_worse": 23,
+      "features_major": 23,
+      "top_features": [
+        "char_count",
+        "noun_ratio",
+        "word_count"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 7.392403391573266,
+          "ks": 0.8426150151274133
+        },
+        "word_count": {
+          "psi": 5.92689213371391,
+          "ks": 0.767339758585197
+        },
+        "sentence_count": {
+          "psi": 3.5850157227796404,
+          "ks": 0.5709790711456286
+        },
+        "avg_word_length": {
+          "psi": 5.09846242789775,
+          "ks": 0.6870041483422227
+        },
+        "avg_sentence_length": {
+          "psi": 1.977192345641355,
+          "ks": 0.4126097127350987
+        },
+        "sentence_length_std": {
+          "psi": 1.899397670308248,
+          "ks": 0.4435993886653567
+        },
+        "type_token_ratio": {
+          "psi": 3.140364711083829,
+          "ks": 0.32918623873241637
+        },
+        "bigram_burstiness": {
+          "psi": 2.0260397982078486,
+          "ks": 0.3996045039144131
+        },
+        "noun_ratio": {
+          "psi": 6.2300877113692685,
+          "ks": 0.770095754967094
+        },
+        "verb_ratio": {
+          "psi": 3.6734478035149705,
+          "ks": 0.5731748853747544
+        },
+        "adj_ratio": {
+          "psi": 1.3506549022143248,
+          "ks": 0.2998995664514519
+        },
+        "adv_ratio": {
+          "psi": 2.0226517121477725,
+          "ks": 0.4487271139390536
+        },
+        "pronoun_ratio": {
+          "psi": 4.080720824487107,
+          "ks": 0.5677477308879948
+        },
+        "det_ratio": {
+          "psi": 0.7163512996657433,
+          "ks": 0.3337475437447366
+        },
+        "adp_ratio": {
+          "psi": 1.643473795317291,
+          "ks": 0.43492467483858893
+        },
+        "conj_ratio": {
+          "psi": 0.4140211921913784,
+          "ks": 0.20841021802189577
+        },
+        "comma_rate": {
+          "psi": 0.9159665033706642,
+          "ks": 0.23786407161348677
+        },
+        "period_rate": {
+          "psi": 1.247619168378318,
+          "ks": 0.28277720595115563
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.1266024141480303
+        },
+        "question_rate": {
+          "psi": 0.705411600054991,
+          "ks": 0.14859174698231492
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.01492529864944947
+        },
+        "flesch_reading_ease": {
+          "psi": 5.200031148631184,
+          "ks": 0.7053441876423069
+        },
+        "flesch_kincaid_grade": {
+          "psi": 4.416904032082794,
+          "ks": 0.6560781011197405
+        },
+        "gunning_fog": {
+          "psi": 5.16150339772567,
+          "ks": 0.6738617011322167
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.08,
+        "auto_flag": 0.92
+      },
+      "vs_own_train": {
+        "score_psi": 0.11572198002330499,
+        "score_level": "moderate",
+        "features_moderate_or_worse": 15
+      }
+    },
+    "radekgpt4": {
+      "kind": "seen AI source",
+      "n": 30,
+      "score_psi": 0.9473438479883347,
+      "score_level": "major",
+      "score_psi_null_p95": 1.5651874077764125,
+      "score_psi_above_noise": false,
+      "score_ks": 0.19269205576869097,
+      "features_moderate_or_worse": 23,
+      "features_major": 23,
+      "top_features": [
+        "char_count",
+        "flesch_reading_ease",
+        "gunning_fog"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 6.836961323428064,
+          "ks": 0.8581235769314743
+        },
+        "word_count": {
+          "psi": 5.44346291574594,
+          "ks": 0.6970712080097314
+        },
+        "sentence_count": {
+          "psi": 1.6809895809128104,
+          "ks": 0.29931380805339824
+        },
+        "avg_word_length": {
+          "psi": 5.162497850624438,
+          "ks": 0.6622563238825988
+        },
+        "avg_sentence_length": {
+          "psi": 3.124962973805912,
+          "ks": 0.602959982533296
+        },
+        "sentence_length_std": {
+          "psi": 4.1244060223688965,
+          "ks": 0.5403543245687907
+        },
+        "type_token_ratio": {
+          "psi": 5.847082670612112,
+          "ks": 0.6527556844764667
+        },
+        "bigram_burstiness": {
+          "psi": 0.61671814457991,
+          "ks": 0.2684757181622532
+        },
+        "noun_ratio": {
+          "psi": 4.621033171696891,
+          "ks": 0.631096971398272
+        },
+        "verb_ratio": {
+          "psi": 3.6750663085424193,
+          "ks": 0.6270515579676242
+        },
+        "adj_ratio": {
+          "psi": 2.391400402796996,
+          "ks": 0.39621658713078195
+        },
+        "adv_ratio": {
+          "psi": 1.0943485863800633,
+          "ks": 0.16895293347057172
+        },
+        "pronoun_ratio": {
+          "psi": 3.103699805783458,
+          "ks": 0.4956894669536196
+        },
+        "det_ratio": {
+          "psi": 2.400018446172267,
+          "ks": 0.35075637066841336
+        },
+        "adp_ratio": {
+          "psi": 1.1712990880990009,
+          "ks": 0.21333395714419384
+        },
+        "conj_ratio": {
+          "psi": 2.443890357810052,
+          "ks": 0.4051932254140545
+        },
+        "comma_rate": {
+          "psi": 2.5680635506647116,
+          "ks": 0.42605969869935434
+        },
+        "period_rate": {
+          "psi": 1.7066315027545664,
+          "ks": 0.3601634384454634
+        },
+        "exclamation_rate": {
+          "psi": 0.7008488398764255,
+          "ks": 0.1266024141480303
+        },
+        "question_rate": {
+          "psi": 0.705411600054991,
+          "ks": 0.15130532422569476
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.0411216119272636
+        },
+        "flesch_reading_ease": {
+          "psi": 6.559286530051409,
+          "ks": 0.7959483484607467
+        },
+        "flesch_kincaid_grade": {
+          "psi": 5.955641247605474,
+          "ks": 0.781444745953027
+        },
+        "gunning_fog": {
+          "psi": 6.39872914430208,
+          "ks": 0.7832444402857054
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.0,
+        "escalate": 0.1,
+        "auto_flag": 0.9
+      },
+      "vs_own_train": {
+        "score_psi": 0.21459172165788004,
+        "score_level": "major",
+        "features_moderate_or_worse": 21
+      }
+    },
+    "falcon_180b_v1": {
+      "kind": "unseen AI source",
+      "n": 1055,
+      "score_psi": 0.03712163417193631,
+      "score_level": "none",
+      "score_psi_null_p95": 0.015812466368727858,
+      "score_psi_above_noise": true,
+      "score_ks": 0.06345717457139982,
+      "features_moderate_or_worse": 19,
+      "features_major": 11,
+      "top_features": [
+        "sentence_count",
+        "avg_word_length",
+        "type_token_ratio"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 0.2226643999424393,
+          "ks": 0.1573209600005676
+        },
+        "word_count": {
+          "psi": 0.4112378761149823,
+          "ks": 0.22780594042369767
+        },
+        "sentence_count": {
+          "psi": 0.8348531582997708,
+          "ks": 0.2753595744841254
+        },
+        "avg_word_length": {
+          "psi": 0.5592380781994326,
+          "ks": 0.20832361770091407
+        },
+        "avg_sentence_length": {
+          "psi": 0.15054667553743226,
+          "ks": 0.08461562681683064
+        },
+        "sentence_length_std": {
+          "psi": 0.16192512101005158,
+          "ks": 0.18307515398298063
+        },
+        "type_token_ratio": {
+          "psi": 0.5455759834495479,
+          "ks": 0.19005275932090943
+        },
+        "bigram_burstiness": {
+          "psi": 0.22768932942867748,
+          "ks": 0.11349644361289374
+        },
+        "noun_ratio": {
+          "psi": 0.46732840149778476,
+          "ks": 0.20918137241641413
+        },
+        "verb_ratio": {
+          "psi": 0.12562927073641672,
+          "ks": 0.10134676625762706
+        },
+        "adj_ratio": {
+          "psi": 0.024180459559753592,
+          "ks": 0.04821954476293783
+        },
+        "adv_ratio": {
+          "psi": 0.0646017805525919,
+          "ks": 0.0925376404073337
+        },
+        "pronoun_ratio": {
+          "psi": 0.2877245629664861,
+          "ks": 0.13895280486501527
+        },
+        "det_ratio": {
+          "psi": 0.05525432538019313,
+          "ks": 0.05754185113064239
+        },
+        "adp_ratio": {
+          "psi": 0.04291334468737328,
+          "ks": 0.05151557213729574
+        },
+        "conj_ratio": {
+          "psi": 0.10029996155678142,
+          "ks": 0.12242486220358084
+        },
+        "comma_rate": {
+          "psi": 0.13268630311136778,
+          "ks": 0.10388171481762179
+        },
+        "period_rate": {
+          "psi": 0.15703852502584328,
+          "ks": 0.13872468521572695
+        },
+        "exclamation_rate": {
+          "psi": 0.13081824886673796,
+          "ks": 0.10290573168357531
+        },
+        "question_rate": {
+          "psi": 0.10865891974775899,
+          "ks": 0.10253268687606898
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.017832091698422592
+        },
+        "flesch_reading_ease": {
+          "psi": 0.35716272401984916,
+          "ks": 0.15424888368159562
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.3183542272553051,
+          "ks": 0.14238089684193533
+        },
+        "gunning_fog": {
+          "psi": 0.24703801891543006,
+          "ks": 0.1420674540578823
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.008530805687203791,
+        "escalate": 0.24644549763033174,
+        "auto_flag": 0.7450236966824645
+      }
+    },
+    "llama_70b_v1": {
+      "kind": "unseen AI source",
+      "n": 1172,
+      "score_psi": 0.5091805374610547,
+      "score_level": "major",
+      "score_psi_null_p95": 0.015003109502186649,
+      "score_psi_above_noise": true,
+      "score_ks": 0.2792660439416203,
+      "features_moderate_or_worse": 20,
+      "features_major": 12,
+      "top_features": [
+        "type_token_ratio",
+        "bigram_burstiness",
+        "sentence_count"
+      ],
+      "features": {
+        "char_count": {
+          "psi": 0.19769249073132167,
+          "ks": 0.12494998069486363
+        },
+        "word_count": {
+          "psi": 0.3034555091814947,
+          "ks": 0.13514146401596028
+        },
+        "sentence_count": {
+          "psi": 0.7237720038921257,
+          "ks": 0.3024027469819956
+        },
+        "avg_word_length": {
+          "psi": 0.46791382566119305,
+          "ks": 0.28512800311437037
+        },
+        "avg_sentence_length": {
+          "psi": 0.35062554333554913,
+          "ks": 0.21483048046317002
+        },
+        "sentence_length_std": {
+          "psi": 0.07982287240825844,
+          "ks": 0.11007776025926685
+        },
+        "type_token_ratio": {
+          "psi": 1.2403207898373436,
+          "ks": 0.2717211527130503
+        },
+        "bigram_burstiness": {
+          "psi": 0.9658738746139582,
+          "ks": 0.23678891549843178
+        },
+        "noun_ratio": {
+          "psi": 0.13962940906060206,
+          "ks": 0.16522594035495264
+        },
+        "verb_ratio": {
+          "psi": 0.27713963330381053,
+          "ks": 0.2110561586259469
+        },
+        "adj_ratio": {
+          "psi": 0.15127397866852574,
+          "ks": 0.16513516310045923
+        },
+        "adv_ratio": {
+          "psi": 0.1306015962600759,
+          "ks": 0.13330715669671078
+        },
+        "pronoun_ratio": {
+          "psi": 0.30135871828711347,
+          "ks": 0.21902787061311135
+        },
+        "det_ratio": {
+          "psi": 0.07137616828494092,
+          "ks": 0.09736966318365181
+        },
+        "adp_ratio": {
+          "psi": 0.13567450036378842,
+          "ks": 0.15607061113131937
+        },
+        "conj_ratio": {
+          "psi": 0.10219850897100716,
+          "ks": 0.09541679454257046
+        },
+        "comma_rate": {
+          "psi": 0.07637718752890937,
+          "ks": 0.14235334563283958
+        },
+        "period_rate": {
+          "psi": 0.21636394105227802,
+          "ks": 0.1633303164733012
+        },
+        "exclamation_rate": {
+          "psi": 0.10507077017739322,
+          "ks": 0.1626467326096489
+        },
+        "question_rate": {
+          "psi": 0.1536102589928338,
+          "ks": 0.16999274420678245
+        },
+        "semicolon_rate": {
+          "psi": 0.0,
+          "ks": 0.025418190133079333
+        },
+        "flesch_reading_ease": {
+          "psi": 0.5176954340775356,
+          "ks": 0.31830457469459084
+        },
+        "flesch_kincaid_grade": {
+          "psi": 0.5451404552281327,
+          "ks": 0.32087691626233394
+        },
+        "gunning_fog": {
+          "psi": 0.4687729589364115,
+          "ks": 0.3005226917587666
+        }
+      },
+      "band_share": {
+        "auto_clear": 0.04692832764505119,
+        "escalate": 0.44283276450511944,
+        "auto_flag": 0.5102389078498294
+      }
+    }
+  }
+}

@@ -25,6 +25,10 @@ should change on purpose.
 
 ## Done
 
+- [x] Phase 7 drift monitoring (`drift/monitor.py`, `results/drift_round1.md`).
+  llama_70b_v1 shifts Stage 1's behavior and falcon_180b_v1 mostly does not.
+  Rerun with `--tag round2 --models-dir ...` after round 2.
+
 - [x] Prompt-held-out evaluation (`evaluation/prompt_holdout.py`). Stage-2
   accuracy on escalated rows was 0.9944 on unseen prompts versus 0.9931 on
   seen ones, so the 99.3% holds. Stage 1 and the combined pipeline are worse
