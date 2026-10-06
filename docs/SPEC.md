@@ -166,8 +166,8 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
      cohere-command (96.6%, n=29).
    - Not ruled out: Stage 2 reads the full text while Stage 1 sees 24
      summary features, so a large gap may be real. A prompt-held-out split
-     would test whether it survives. Until then, report 99.3% with these
-     caveats, and de-duplicate the splits before round 2.
+     would test whether it survives. That test has since run, see 6.6.
+     Near-duplicates were removed, see 6.4.
 3. **HITL pass to be redone entirely.** The existing `hitl/reviews.jsonl`
    is unfinished and will be superseded once the changes above and the
    round-2 data are in. Archive it (outside git, gitignored) rather than
@@ -209,17 +209,45 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
    Not fixed, because fixing it means retraining every model. Decide before
    round 2.
 
+6. **Prompt-held-out evaluation: the Stage-2 result survives, Stage 1 does
+   not.** Three of the 15 prompts were held out with a seeded draw (seed 42:
+   Mandatory extracurricular activities, Car-free cities, "A Cowboy Who Rode
+   the Waves"). Stage 1 was retrained on the other 12 prompts, its bands
+   were recalibrated on their val rows, and Stage 2 was fine-tuned for 3
+   epochs on the 4,387 escalated rows of those prompts, with the main run's
+   hyperparameters. Full tables are in `results/prompt_holdout.md`.
+   - Stage-2 accuracy on escalated test rows was 0.9944 on the held-out
+     prompts (354 rows, 95% interval 0.9796 to 0.9984), 0.9931 on the seen
+     prompts (1,010 rows) and 0.9932 in the main run. So the 99.3% is not
+     explained by prompt memorization.
+   - Stage 1 alone is worse on unseen prompts. Test accuracy was 0.9280 on
+     held-out prompts and 0.9636 on seen prompts. The escalation rate was
+     0.2930 against 0.2065, and the false-positive rate on human essays at
+     the 0.5 threshold was 0.0477 against 0.0340.
+   - The combined pipeline is also worse on unseen prompts, even though Stage
+     2 keeps its accuracy on the rows it sees. Accuracy was 0.9884 against
+     0.9947. The human false-positive rate was 0.0087 against 0.0032, which
+     is about 2.7 times higher, but that is 6 of 692 human essays against 10
+     of 3,117, so the ratio is a rough estimate. Stage 2 only sees the
+     escalated rows, so Stage-1 auto-flags stay wrong. Five of the 6
+     held-out-prompt false positives and 8 of the 10 seen-prompt ones were
+     Stage-1 auto-flags. The rest came from Stage 2.
+   - Dangerous errors (said human, was AI) among escalated rows were 1 on the
+     held-out prompts and 5 on the seen prompts.
+   - Limits: this is one draw of 3 prompts, so a different draw could
+     differ. It does not test unseen generators, which are reserved for round
+     2. Why a language model reading the whole essay does so much better than
+     the 24 summary features on these rows is still not explained.
+
 ## 7. Decisions on scope (author, Phase 1)
 
 1. **Remove near-duplicates across splits.** Done, see 6.4. Near-duplicate
    train/val/test pairs were removed at an overlap of at least 80%, the
    exact-text overlaps are covered by that rule, and the removals are logged
    per split, source and label.
-2. **Add a prompt-held-out evaluation.** Hold out whole essay prompts from
-   Stage 1 and Stage 2 training and evaluate on them, to test whether the
-   Stage-2 gain survives on unseen topics. Report it next to the main
-   result, not instead of it. Which prompts to hold out is to be decided
-   at implementation time and documented.
+2. **Add a prompt-held-out evaluation.** Done, see 6.6. Whole essay prompts
+   were held out from both stages and tested next to the main result, with
+   the prompts chosen by a seeded draw.
 
 Both are behavior changes in `data/preprocess.py` and the evaluation code,
 so they come after the standards are installed and tests exist

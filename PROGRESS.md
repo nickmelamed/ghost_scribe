@@ -17,8 +17,6 @@ regenerate `results/` and record the before and after (`/refresh-results`).
 The characterization tests are the before-state, and any test that changes
 should change on purpose.
 
-- [ ] Add a prompt-held-out evaluation and report it next to the main
-  result. Re-check the 99.3% Stage-2 accuracy on escalated test rows.
 - [ ] Redo the HITL pass from scratch on a fresh queue (`/hitl-round`).
   Archive the unfinished `hitl/reviews.jsonl` first.
 - [ ] Build phases 6, 7 and 8 from docs/SPEC.md: round-2 retraining with a
@@ -26,6 +24,12 @@ should change on purpose.
   and the full README with the ethics section.
 
 ## Done
+
+- [x] Prompt-held-out evaluation (`evaluation/prompt_holdout.py`). Stage-2
+  accuracy on escalated rows was 0.9944 on unseen prompts versus 0.9931 on
+  seen ones, so the 99.3% holds. Stage 1 and the combined pipeline are worse
+  on unseen prompts, with a combined human false-positive rate of 0.0087
+  against 0.0032. See docs/SPEC.md 6.6 and `results/prompt_holdout.md`.
 
 - [x] Remove near-duplicates from val, test and ESL (`data/dedup.py`). 228,
   297 and 546 rows, all human. Headline metrics barely moved, the ESL gap
@@ -68,9 +72,12 @@ Carried over from the Phase 0 assessment.
 - `.claude/style-ignore` skips the two generated tables, because their text
   comes from string literals in the code that writes them.
 - The standards scripts in `scripts/agent/` are excluded from ruff and mypy.
-- Stage 2 is 99.3% on escalated test rows versus 84.4% for Stage 1. Near
-  duplicates do not explain it, but all 15 prompts appear in train and test,
-  so it is unconfirmed until the prompt-held-out evaluation runs.
+- Stage 2 is 99.3% on escalated test rows versus 84.4% for Stage 1. Neither
+  near-duplicates nor prompt memorization explain it. It was not tested on
+  unseen generators, which are reserved for round 2. The prompt-held-out run
+  is a single draw of 3 prompts.
+- Stage 1 and the combined pipeline degrade on unseen prompts, mostly through
+  more false positives on human essays. Worth addressing in round 2.
 - Mutation testing (`mutmut`) and coverage have not been run.
 - Model code, the Streamlit app, and the evaluation entry points have no
   tests because they need models, a browser, or write real result files.

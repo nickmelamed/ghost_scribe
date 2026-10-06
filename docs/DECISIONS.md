@@ -134,3 +134,14 @@ can be read directly, and it avoids retraining Stage 2 for a small shift.
 The escalation rate on the cleaned val is reported as measured. The
 thresholds get recalibrated and Stage 2 retrained in round 2, which retrains
 both stages anyway. (`stage1/models/escalation_thresholds.json`)
+
+## D22. Prompt-held-out check uses a seeded draw of 3 prompts and a full retrain
+Holding out prompts only means something if both stages are retrained
+without them, so Stage 1 was refit, the bands were recalibrated on the seen
+prompts' val rows, and Stage 2 was fine-tuned again on their escalated train
+rows with unchanged hyperparameters. The three prompts come from
+`random.Random(42)`, so they were not picked by hand. The same retrained
+models are scored on held-out and seen prompts, which separates prompt shift
+from the effect of retraining. It is a single draw, so the result carries
+that variance, and k-fold over prompts was not run because each Stage-2 fit
+takes about 4.5 hours on this machine. (`evaluation/prompt_holdout.py`)

@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "holdout_seed": 42,
+    "held_out_prompts": [
+      "Mandatory extracurricular activities",
+      "Car-free cities",
+      "\"A Cowboy Who Rode the Waves\""
+    ],
+    "target_escalation_rate": 0.2,
+    "t_low": 0.04024595022201538,
+    "t_high": 0.9597540497779846,
+    "rows": {
+      "train_seen": 23408,
+      "train_held_out": 6438,
+      "val_seen": 4923,
+      "val_held_out": 1245
+    },
+    "stage2_train_escalated": 4387,
+    "test_groups": {
+      "test_heldout_prompts": {
+        "rows": 1208,
+        "escalated": 354
+      },
+      "test_seen_prompts": {
+        "rows": 4891,
+        "escalated": 1010
+      }
+    }
+  },
+  "test_heldout_prompts": {
+    "n_rows": 1208,
+    "escalation_rate": 0.29304635761589404,
+    "stage2_fallbacks": 0,
+    "escalated_subset": {
+      "n": 354,
+      "stage1_alone": {
+        "auc_roc": 0.8579910141206675,
+        "precision": 0.8362573099415205,
+        "recall": 0.7526315789473684,
+        "f1": 0.7922437673130194,
+        "accuracy": 0.788135593220339
+      },
+      "stage1_plus_2": {
+        "auc_roc": NaN,
+        "precision": 0.9947368421052631,
+        "recall": 0.9947368421052631,
+        "f1": 0.9947368421052631,
+        "accuracy": 0.9943502824858758
+      },
+      "stage1_accuracy_ci95": [
+        0.7425905194758018,
+        0.827494121326162
+      ],
+      "stage2_accuracy_ci95": [
+        0.9796370871516964,
+        0.9984493063810846
+      ]
+    },
+    "full_pipeline": {
+      "stage1_only": {
+        "auc_roc": 0.979642761123807,
+        "precision": 0.9333333333333333,
+        "recall": 0.8953488372093024,
+        "f1": 0.913946587537092,
+        "accuracy": 0.9279801324503312
+      },
+      "stage1_plus_2": {
+        "auc_roc": NaN,
+        "precision": 0.9883268482490273,
+        "recall": 0.9844961240310077,
+        "f1": 0.9864077669902913,
+        "accuracy": 0.9884105960264901
+      }
+    },
+    "human_fpr_stage1_only": 0.0476878612716763,
+    "human_fpr_combined": 0.008670520231213872,
+    "dangerous_errors": 1,
+    "escalated_by_prompt": {
+      "\"A Cowboy Who Rode the Waves\"": {
+        "n_escalated": 97,
+        "stage1_accuracy": 0.7938144329896907,
+        "stage2_accuracy": 0.9896907216494846
+      },
+      "Car-free cities": {
+        "n_escalated": 169,
+        "stage1_accuracy": 0.7810650887573964,
+        "stage2_accuracy": 1.0
+      },
+      "Mandatory extracurricular activities": {
+        "n_escalated": 88,
+        "stage1_accuracy": 0.7954545454545454,
+        "stage2_accuracy": 0.9886363636363636
+      }
+    },
+    "n_escalated_check": 354
+  },
+  "test_seen_prompts": {
+    "n_rows": 4891,
+    "escalation_rate": 0.2065017378859129,
+    "stage2_fallbacks": 0,
+    "escalated_subset": {
+      "n": 1010,
+      "stage1_alone": {
+        "auc_roc": 0.9096265323576926,
+        "precision": 0.7710280373831776,
+        "recall": 0.8439897698209718,
+        "f1": 0.8058608058608059,
+        "accuracy": 0.8425742574257425
+      },
+      "stage1_plus_2": {
+        "auc_roc": NaN,
+        "precision": 0.9948453608247423,
+        "recall": 0.9872122762148338,
+        "f1": 0.9910141206675225,
+        "accuracy": 0.9930693069306931
+      },
+      "stage1_accuracy_ci95": [
+        0.8188198112635579,
+        0.8637325716727904
+      ],
+      "stage2_accuracy_ci95": [
+        0.9857631582762351,
+        0.9966388264124973
+      ]
+    },
+    "full_pipeline": {
+      "stage1_only": {
+        "auc_roc": 0.9926674066896487,
+        "precision": 0.9413716814159292,
+        "recall": 0.9594137542277339,
+        "f1": 0.9503070910106086,
+        "accuracy": 0.9636066244121857
+      },
+      "stage1_plus_2": {
+        "auc_roc": NaN,
+        "precision": 0.994343891402715,
+        "recall": 0.9909808342728298,
+        "f1": 0.9926595143986449,
+        "accuracy": 0.9946841136781844
+      }
+    },
+    "human_fpr_stage1_only": 0.03400705806865576,
+    "human_fpr_combined": 0.003208213025344883,
+    "dangerous_errors": 5,
+    "escalated_by_prompt": {
+      "Cell phones at school": {
+        "n_escalated": 44,
+        "stage1_accuracy": 0.9772727272727273,
+        "stage2_accuracy": 1.0
+      },
+      "Community service": {
+        "n_escalated": 76,
+        "stage1_accuracy": 0.8289473684210527,
+        "stage2_accuracy": 1.0
+      },
+      "Distance learning": {
+        "n_escalated": 97,
+        "stage1_accuracy": 0.865979381443299,
+        "stage2_accuracy": 0.9896907216494846
+      },
+      "Does the electoral college work?": {
+        "n_escalated": 183,
+        "stage1_accuracy": 0.825136612021858,
+        "stage2_accuracy": 1.0
+      },
+      "Driverless cars": {
+        "n_escalated": 45,
+        "stage1_accuracy": 0.9111111111111111,
+        "stage2_accuracy": 1.0
+      },
+      "Exploring Venus": {
+        "n_escalated": 90,
+        "stage1_accuracy": 0.8555555555555555,
+        "stage2_accuracy": 1.0
+      },
+      "Facial action coding system": {
+        "n_escalated": 100,
+        "stage1_accuracy": 0.69,
+        "stage2_accuracy": 0.99
+      },
+      "Grades for extracurricular activities": {
+        "n_escalated": 53,
+        "stage1_accuracy": 0.9433962264150944,
+        "stage2_accuracy": 1.0
+      },
+      "Phones and driving": {
+        "n_escalated": 44,
+        "stage1_accuracy": 0.8409090909090909,
+        "stage2_accuracy": 1.0
+      },
+      "Seeking multiple opinions": {
+        "n_escalated": 145,
+        "stage1_accuracy": 0.8275862068965517,
+        "stage2_accuracy": 0.9862068965517241
+      },
+      "Summer projects": {
+        "n_escalated": 77,
+        "stage1_accuracy": 0.8441558441558441,
+        "stage2_accuracy": 0.961038961038961
+      },
+      "The Face on Mars": {
+        "n_escalated": 56,
+        "stage1_accuracy": 0.9107142857142857,
+        "stage2_accuracy": 1.0
+      }
+    },
+    "n_escalated_check": 1010
+  },
+  "main_run": {
+    "escalation_rate": 0.21724872929988523,
+    "stage1_only_accuracy": 0.9611411706837186,
+    "stage1_plus_2_accuracy": 0.9936055090998525,
+    "escalated_n": 1325,
+    "escalated_stage1_accuracy": 0.8437735849056603,
+    "escalated_stage2_accuracy": 0.9932075471698113
+  }
+}
