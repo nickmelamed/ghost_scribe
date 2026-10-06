@@ -1,0 +1,34 @@
+# Edits to these paths need the owner's approval, even in auto mode.
+# One glob per line, relative to the repo root. "*" crosses directories and a
+# trailing "/" means everything under it. Text after "  #" is the reason.
+#
+# The agent's own settings, this list, gate-commands, style-ignore,
+# style-words, and scripts/agent/ are always protected by guard_edit.py,
+# whatever this file says.
+CLAUDE.md  # the project's instructions to Claude
+.claude/rules/  # path-scoped standards
+.claude/agents/  # reviewer agents
+.claude/skills/  # repo procedures
+Makefile  # defines agent-check and ci
+pyproject.toml  # dependencies and lint, type, and test configuration
+setup.cfg  # tool configuration
+pytest.ini  # test selection
+tox.ini  # test selection
+.pre-commit-config.yaml  # commit hooks
+.github/workflows/  # CI
+*.lock  # locked dependencies
+package-lock.json  # locked dependencies
+evaluation/  # metric and evaluation code
+fairness/  # fairness check and ESL eval-set builder
+results/  # generated results tables and metrics json
+data/preprocess.py  # split logic and held-out source list
+data/processed/dataset_summary.md  # documented split sizes
+data/raw/  # raw datasets, including the eval-only ELLIPSE corpus
+data/checksums.txt  # data checksums, once created
+stage1/escalation_policy.py  # calibrates the escalation bands
+stage1/models/escalation_thresholds.json  # calibrated thresholds
+stage2/build_review_queue.py  # gate that decides what a human reviews
+hitl/reviews.jsonl  # human review decisions
+hitl/llm_reviews.jsonl  # LLM review decisions
+.env  # secrets
+.env.*  # secrets

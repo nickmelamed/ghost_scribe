@@ -16,6 +16,11 @@ stage1/models/*.joblib
 *.bin
 *.safetensors
 
+# Secrets
+.env
+.env.*
+!.env.example
+
 # Kaggle credentials — never commit
 .kaggle/
 kaggle.json
@@ -23,3 +28,11 @@ kaggle.json
 # HITL review session output — local, not committed
 hitl/reviews.jsonl
 hitl/llm_reviews.jsonl
+
+# Claude Code agent tooling
+.claude/.gate-state.json
+.claude/settings.local.json
+
+# Scratch copies made by repo skills
+results/_before/
+hitl/archive/
