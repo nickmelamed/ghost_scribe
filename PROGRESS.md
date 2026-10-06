@@ -25,6 +25,9 @@ should change on purpose.
 
 ## Done
 
+- [x] Round 2 pipeline (`evaluation/round2.py`) and `round2` skill, built and
+  tested. It needs the HITL corrections and about 9 hours of compute to run.
+
 - [x] Phase 7 drift monitoring (`drift/monitor.py`, `results/drift_round1.md`).
   llama_70b_v1 shifts Stage 1's behavior and falcon_180b_v1 mostly does not.
   Rerun with `--tag round2 --models-dir ...` after round 2.

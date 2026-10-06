@@ -122,10 +122,12 @@ results file today. **Please confirm whether they should be guarded.**
 
 ## 5. Not built yet [INFERRED]
 
-Phase 6 (round 2 retrain with a held-out source plus HITL corrections),
-Phase 7 (`drift/monitor.py`), Phase 8 (`viz/trend_plots.py`, full README),
-and a completed human review pass (`hitl/reviews.jsonl` exists locally
-but is unfinished and will be redone).
+A completed human review pass (`hitl/reviews.jsonl` exists locally but is
+unfinished and will be redone), and the round-2 run that depends on it.
+Round 2 itself (`evaluation/round2.py`, the `round2` skill) is built and
+tested, and it refuses to run without the reviewed corrections. Phase 7
+(`drift/monitor.py`) is done, see 6.7. The trend plots, cost per decision and
+README are built, with the round-2 columns marked TBD until that run.
 
 ## 6. Findings and planned changes (from the Phase 1 review)
 
@@ -268,6 +270,19 @@ Confirmed by the author: markings in sections 2 and 4 are fine as drafted
    - Limits: the reference is pooled, the batches differ in size by a factor
      of 40, and PSI with ten quantile bins is coarse on the near-binary
      Stage-1 score.
+
+8. **Round 2 (Phase 6) is built, not yet run.** `evaluation/round2.py` adds
+   llama_70b_v1 (split 70/15/15, seed 42) and the reviewed essays, which are
+   labeled with the reviewer's decision, and retrains both stages from
+   scratch. falcon_180b_v1 stays unseen. The reviewed essays come from val, so
+   they leave the val rows used for calibration. The bands and the review
+   gate are recalibrated on the round-2 val rows. Test, ESL and new-source
+   rows that near-duplicate the round-2 training data are dropped. A dry run
+   on the real data without corrections gave 5,923 escalated training rows,
+   so the retrain is about 7 hours with the reviewed essays added. The
+   round-1 test group stays the comparison set, so round 1 and round 2 can be
+   compared on the same essays. The word-count column issue from 6.5 is kept,
+   so the two rounds differ only in data.
 
 ## 7. Decisions on scope (author, Phase 1)
 

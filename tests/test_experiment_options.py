@@ -5,7 +5,7 @@ import pandas as pd
 
 from stage1.baseline_xgb import fit
 from stage1.features import FEATURE_COLUMNS
-from stage2 import finetune_lora, infer
+from stage2 import confidence, finetune_lora, infer
 from stage2.prepare_finetune_data import SYSTEM_PROMPT, build_records
 
 
@@ -68,3 +68,16 @@ def test_build_records_adds_a_target_only_when_asked():
     with_target = build_records(df, True, top, direction, mean, std)
     assert with_target[0]["target"].startswith("Label: Human-written\nRationale: ")
     assert with_target[1]["target"].startswith("Label: AI-generated\nRationale: ")
+
+
+def test_confidence_options_default_to_the_main_run_paths():
+    args = confidence.parse_args([])
+    assert args.split == "val"
+    assert args.data_dir == confidence.ROOT / "stage2" / "data"
+    assert args.adapter_dir == confidence.ADAPTER_DIR
+    assert args.out_dir == confidence.ROOT / "data" / "processed"
+
+
+def test_confidence_options_can_point_at_another_experiment():
+    args = confidence.parse_args(["test_r1", "--data-dir", "d", "--adapter-dir", "a", "--out-dir", "o"])
+    assert (args.split, args.data_dir, args.adapter_dir, args.out_dir) == ("test_r1", Path("d"), Path("a"), Path("o"))

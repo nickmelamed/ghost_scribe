@@ -156,3 +156,25 @@ score PSI that a same-size bootstrap sample reaches. The 0.1 and 0.2
 thresholds are the conventional ones and are reported as such, but they flag
 most sources, so the report adds routing shares (cleared, escalated,
 flagged) as the decision-relevant signal. (`drift/monitor.py`)
+
+## D24. Round 2 introduces llama_70b_v1 and keeps falcon_180b_v1 unseen
+Round 1 showed llama_70b_v1 shifting Stage 1's behavior (score PSI 0.509)
+and falcon_180b_v1 mostly not (0.037). Introducing the one that drifted gives
+round 2 something to absorb, and the quieter one stays unseen as a test of
+generalization. It is also the larger source, with 1,172 essays.
+
+## D25. Reviewed essays train with the reviewer's label and leave calibration
+The reviewer's decision, not Stage 2's suggestion and not the ground truth,
+is the training label, which is the point of the loop. Reviewed essays come
+from val, so they are removed from the val rows that calibrate the bands and
+the review gate. Evaluation still uses the true labels. The ESL and test rows
+are checked against the new training data for near-duplicates, because
+otherwise ELLIPSE essays that match a reviewed val essay would put the
+fairness set back into training.
+
+## D26. Round 2 retrains both stages from scratch and keeps the round-1 test group
+Continuing from the round-1 adapter would be cheaper but would blur what
+changed. A full retrain with the main run's hyperparameters changes only the
+data. The round-1 test essays stay the comparison group, minus any removed as
+near-duplicates, which `meta.json` counts. Costs per decision use the
+documented illustrative units of 1, 5 and 25 and are not real money.

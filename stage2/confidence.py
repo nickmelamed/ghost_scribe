@@ -22,6 +22,8 @@ confidence.
 
 from __future__ import annotations
 
+import argparse
+import json
 import math
 from pathlib import Path
 
@@ -39,13 +41,13 @@ CANDIDATE_HUMAN = "Label: Human-written"
 BATCH_SIZE = 16
 
 
-def load_model():
+def load_model(adapter_dir: Path = ADAPTER_DIR):
     device = "mps" if torch.backends.mps.is_available() else "cpu"
     tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     base = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16)
-    model = PeftModel.from_pretrained(base, str(ADAPTER_DIR)).to(device).eval()
+    model = PeftModel.from_pretrained(base, str(adapter_dir)).to(device).eval()
     return model, tokenizer, device
 
 
@@ -138,14 +140,26 @@ def compute_confidence(model, tokenizer, device, records: list[dict]) -> pd.Data
     return pd.DataFrame(rows)
 
 
-if __name__ == "__main__":
-    import json
-    import sys
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("split", nargs="?", default="val", help="name of a JSONL file in the data folder")
+    parser.add_argument("--data-dir", type=Path, default=ROOT / "stage2" / "data")
+    parser.add_argument("--adapter-dir", type=Path, default=ADAPTER_DIR)
+    parser.add_argument("--out-dir", type=Path, default=ROOT / "data" / "processed")
+    return parser.parse_args(argv)
 
-    split = sys.argv[1] if len(sys.argv) > 1 else "val"
-    records = [json.loads(line) for line in (ROOT / "stage2" / "data" / f"{split}.jsonl").open()]
-    model, tokenizer, device = load_model()
+
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
+    records = [json.loads(line) for line in (args.data_dir / f"{args.split}.jsonl").open()]
+    model, tokenizer, device = load_model(args.adapter_dir)
     df = compute_confidence(model, tokenizer, device, records)
-    out_path = ROOT / "data" / "processed" / f"stage2_confidence_{split}.csv"
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = args.out_dir / f"stage2_confidence_{args.split}.csv"
     df.to_csv(out_path, index=False)
     print(f"Wrote {len(df)} confidence scores to {out_path}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
